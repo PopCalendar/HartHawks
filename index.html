@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hart Hawks Baseball</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Hart Hawks logo">
+      <span class="brand-text">HART HAWKS<small>Baseball</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">Menu</button>
+    <nav class="primary-nav">
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="stats.html">Stats</a></li>
+        <li><a href="hart-pride.html">Hart Pride</a></li>
+        <li class="has-dropdown">
+          <a href="#">Support ▾</a>
+          <div class="dropdown">
+            <a href="dugout-club.html">Dugout Club</a>
+            <a href="gear.html">Gear</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-kicker">VARSITY · JV · FRESHMAN</div>
+    <h1>Hart Hawks Baseball</h1>
+    <p class="lede">Schedules, rosters, and everything else for Hawks baseball, all in one place — built for the parents running it as much as the fans following it.</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="schedule.html">See the schedule</a>
+      <a class="btn" href="dugout-club.html">Join the Dugout Club</a>
+    </div>
+  </div>
+</section>
+
+<div class="quick-links">
+  <a class="quick-link" href="team.html">
+    <div class="num">ROSTERS</div>
+    <h3>Meet the teams</h3>
+    <p>Varsity, JV, and Freshman rosters. <span class="arrow">View →</span></p>
+  </a>
+  <a class="quick-link" href="stats.html">
+    <div class="num">STATS</div>
+    <h3>Season stats</h3>
+    <p>Full team and player stats on MaxPreps. <span class="arrow">View →</span></p>
+  </a>
+  <a class="quick-link" href="dugout-club.html">
+    <div class="num">GIVE</div>
+    <h3>Support the program</h3>
+    <p>Dugout Club donations keep the season running. <span class="arrow">View →</span></p>
+  </a>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Latest from the diamond</h2>
+      <span class="tag">HART PRIDE</span>
+    </div>
+    <p>This spot is a good home for recent recaps, announcements, or a photo from the last game — swap this paragraph out for real season updates once things get rolling.</p>
+    <p><a href="hart-pride.html">See Hart Pride →</a></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div>
+      <div class="brand-text" style="color:#fff;">HART HAWKS BASEBALL</div>
+      <p style="color:#a49f95; max-width:40ch; margin-top:6px;">William S. Hart High School</p>
+    </div>
+    <div class="social-links" id="socialLinks"></div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrap = document.getElementById('socialLinks');
+    const s = SITE_CONFIG.social;
+    const items = [
+      ['Instagram', s.instagram],
+      ['X', s.x],
+      ['Facebook', s.facebook]
+    ];
+    items.forEach(([label, url]) => {
+      if (url && !url.startsWith('PLACEHOLDER')) {
+        const a = document.createElement('a');
+        a.href = url; a.textContent = label; a.target = '_blank'; a.rel = 'noopener';
+        wrap.appendChild(a);
+      }
+    });
+  });
+</script>
+</body>
+</html>

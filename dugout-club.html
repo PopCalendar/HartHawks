@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dugout Club — Hart Hawks Baseball</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Hart Hawks logo">
+      <span class="brand-text">HART HAWKS<small>Baseball</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">Menu</button>
+    <nav class="primary-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="stats.html">Stats</a></li>
+        <li><a href="hart-pride.html">Hart Pride</a></li>
+        <li class="has-dropdown">
+          <a href="#">Support ▾</a>
+          <div class="dropdown">
+            <a href="dugout-club.html">Dugout Club</a>
+            <a href="gear.html">Gear</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <h1>Dugout Club</h1>
+    <p>Booster support that keeps equipment, travel, and team needs covered.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+    <div class="placeholder-note">Set the real PayPal.me link and Zelle details in js/config.js (SITE_CONFIG.donate). Drop a real Zelle QR code image at assets/zelle-qr-placeholder.png (or update the path).</div>
+
+    <div class="donate-grid">
+      <div class="donate-panel">
+        <h3>Give with PayPal</h3>
+        <p>One-time or recurring, any amount.</p>
+        <a class="btn btn-solid" style="border-color:var(--black); color:var(--paper); background:var(--red); border-color:var(--red);" id="paypalLink" href="#" target="_blank" rel="noopener">Donate on PayPal</a>
+      </div>
+      <div class="donate-panel">
+        <h3>Give with Zelle</h3>
+        <p>Scan to send directly, no fees.</p>
+        <img class="qr" id="zelleQr" src="" alt="Zelle QR code">
+        <p id="zelleHandle" style="font-size:0.9rem; color:var(--muted);"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand-text" style="color:#fff;">HART HAWKS BASEBALL</div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('paypalLink').href = SITE_CONFIG.donate.paypalUrl;
+    document.getElementById('zelleQr').src = SITE_CONFIG.donate.zelleQrImage;
+    document.getElementById('zelleHandle').textContent = SITE_CONFIG.donate.zelleHandle;
+  });
+</script>
+</body>
+</html>

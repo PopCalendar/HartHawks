@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hart Pride — Hart Hawks Baseball</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Hart Hawks logo">
+      <span class="brand-text">HART HAWKS<small>Baseball</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">Menu</button>
+    <nav class="primary-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="stats.html">Stats</a></li>
+        <li><a href="hart-pride.html" class="active">Hart Pride</a></li>
+        <li class="has-dropdown">
+          <a href="#">Support ▾</a>
+          <div class="dropdown">
+            <a href="dugout-club.html">Dugout Club</a>
+            <a href="gear.html">Gear</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <h1>Hart Pride</h1>
+    <p>News, recaps, and photos from the season.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+    <div class="placeholder-note">Photos below pull from the Photos tab of the team spreadsheet (SITE_CONFIG.sheets.photos in js/config.js). Add a row with Team, Caption, and an image URL to add a new photo.</div>
+
+    <div class="card-grid" id="photoGrid"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand-text" style="color:#fff;">HART HAWKS BASEBALL</div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const photos = await fetchSheet(SITE_CONFIG.sheets.photos, 'data/sample-photos.csv');
+    const grid = document.getElementById('photoGrid');
+    if (!photos.length) {
+      grid.innerHTML = '<p>No photos posted yet.</p>';
+      return;
+    }
+    grid.innerHTML = photos.map(p => `
+      <div class="gear-card">
+        <div class="photo" style="background-image:url('${p.ImageURL}'); background-size:cover; background-position:center;"></div>
+        <div class="body">
+          <div class="role">${p.Team || ''}</div>
+          <p style="margin:4px 0 0;">${p.Caption || ''}</p>
+        </div>
+      </div>
+    `).join('');
+  });
+</script>
+</body>
+</html>
