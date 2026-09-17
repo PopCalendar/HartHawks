@@ -77,14 +77,28 @@ function renderCalendar() {
 
     const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     games.filter(g => g.Date === dateStr).forEach(g => {
-      const chip = document.createElement('div');
-      chip.className = 'game-chip' + (g.HomeAway === 'Away' ? ' away' : '');
-      chip.textContent = `${g.HomeAway === 'Away' ? '@' : 'vs'} ${g.Opponent}`;
-      cell.appendChild(chip);
+      cell.appendChild(buildGameCard(g));
     });
 
     grid.appendChild(cell);
   }
+}
+
+function buildGameCard(g) {
+  const card = document.createElement('div');
+  card.className = 'game-card' + (g.HomeAway === 'Away' ? ' away' : '');
+
+  const hasResult = g.Result && g.Result.trim().length > 0;
+  const resultClass = g.Result === 'W' ? 'win' : g.Result === 'L' ? 'loss' : '';
+
+  card.innerHTML = `
+    ${g.OpponentLogo ? `<img class="opp-logo" src="${g.OpponentLogo}" alt="${g.Opponent} logo">` : ''}
+    <div class="matchup">${g.HomeAway === 'Away' ? '@' : 'vs.'} ${g.Opponent}</div>
+    ${hasResult
+      ? `<div class="game-result ${resultClass}">${g.Result}, ${g.Score}</div>`
+      : `<div class="game-time">${g.Time || ''}</div>`}
+  `;
+  return card;
 }
 
 function renderList() {
@@ -101,6 +115,9 @@ function renderList() {
     const d = new Date(g.Date + 'T00:00:00');
     const ticket = document.createElement('div');
     ticket.className = 'ticket';
+    const hasResult = g.Result && g.Result.trim().length > 0;
+    const resultClass = g.Result === 'W' ? 'win' : g.Result === 'L' ? 'loss' : '';
+
     ticket.innerHTML = `
       <div class="date-block">
         <div class="d">${isNaN(d) ? '--' : d.getDate()}</div>
@@ -108,7 +125,11 @@ function renderList() {
       </div>
       <div>
         <div class="opp">${g.HomeAway === 'Away' ? '@' : 'vs'} ${g.Opponent}</div>
-        <div class="meta">${g.Time || ''} · ${g.Location || ''}</div>
+        <div class="meta">
+          ${hasResult
+            ? `<span class="result-inline ${resultClass}">${g.Result}, ${g.Score}</span>`
+            : (g.Time || '')} · ${g.Location || ''}
+        </div>
       </div>
       <div class="tag">${g.HomeAway || ''}</div>
     `;

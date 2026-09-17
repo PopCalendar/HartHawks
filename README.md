@@ -10,10 +10,17 @@ is regular content edited directly in the HTML files.
 Create one Google Sheet with three tabs, using these exact column headers:
 
 **Schedule tab**
-`Team, Date, Time, Opponent, Location, HomeAway`
+`Team, Date, Time, Opponent, OpponentLogo, Location, HomeAway, Result, Score`
 - `Team` must be exactly `Varsity`, `JV`, or `Freshman`
 - `Date` must be in `YYYY-MM-DD` format (e.g. `2026-03-17`)
 - `HomeAway` must be exactly `Home` or `Away`
+- `OpponentLogo` is a direct link to a small logo image for the opposing
+  school (same rule as photo links below — a direct image link, not a
+  share link)
+- `Result` and `Score` stay **blank** until the game has been played, then
+  fill in `Result` as exactly `W` or `L` and `Score` as e.g. `5-4`. Once
+  filled in, the calendar automatically shows the score instead of the
+  game time for that day.
 
 **Roster tab**
 `Team, Number, Name, Position, Grade`
