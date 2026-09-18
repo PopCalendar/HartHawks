@@ -12,9 +12,10 @@ const SITE_CONFIG = {
   // Published Google Sheet CSV links.
   // In Google Sheets: File > Share > Publish to web > choose the tab > CSV.
   sheets: {
-    schedule: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=0&single=true&output=csv",
+    schedule: "PLACEHOLDER_SCHEDULE_CSV_URL",
     roster: "PLACEHOLDER_ROSTER_CSV_URL",
-    photos: "PLACEHOLDER_PHOTOS_CSV_URL"
+    photos: "PLACEHOLDER_PHOTOS_CSV_URL",
+    coaches: "PLACEHOLDER_COACHES_CSV_URL"
   },
 
   // External stats provider — link to the team's MaxPreps or GameChanger page.

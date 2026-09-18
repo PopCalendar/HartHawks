@@ -44,42 +44,9 @@
 
 <div class="section">
   <div class="container">
-    <div class="placeholder-note">Placeholder bios below — swap in real names, roles, and photos by editing coaches.html directly (this page isn't spreadsheet-driven since it changes rarely).</div>
+    <div class="placeholder-note">Coach cards below pull from the Coaches tab of the team spreadsheet (SITE_CONFIG.sheets.coaches in js/config.js). Add a row with Team, Role, Name, Bio, and a Photo link to add or update a coach.</div>
 
-    <div class="card-grid">
-      <div class="coach-card">
-        <div class="photo"></div>
-        <div class="body">
-          <div class="role">Head Coach · Varsity</div>
-          <h3>Coach Name</h3>
-          <p>A line or two about coaching background or role.</p>
-        </div>
-      </div>
-      <div class="coach-card">
-        <div class="photo"></div>
-        <div class="body">
-          <div class="role">Head Coach · JV</div>
-          <h3>Coach Name</h3>
-          <p>A line or two about coaching background or role.</p>
-        </div>
-      </div>
-      <div class="coach-card">
-        <div class="photo"></div>
-        <div class="body">
-          <div class="role">Head Coach · Freshman</div>
-          <h3>Coach Name</h3>
-          <p>A line or two about coaching background or role.</p>
-        </div>
-      </div>
-      <div class="coach-card">
-        <div class="photo"></div>
-        <div class="body">
-          <div class="role">Assistant Coach</div>
-          <h3>Coach Name</h3>
-          <p>A line or two about coaching background or role.</p>
-        </div>
-      </div>
-    </div>
+    <div class="card-grid" id="coachGrid"></div>
   </div>
 </div>
 
@@ -91,5 +58,25 @@
 
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const coaches = await fetchSheet(SITE_CONFIG.sheets.coaches, 'data/sample-coaches.csv');
+    const grid = document.getElementById('coachGrid');
+    if (!coaches.length) {
+      grid.innerHTML = '<p>Coach list not posted yet.</p>';
+      return;
+    }
+    grid.innerHTML = coaches.map(c => `
+      <div class="coach-card">
+        <div class="photo" style="background-image:url('${c.Photo}'); background-size:cover; background-position:center;"></div>
+        <div class="body">
+          <div class="role">${c.Team ? c.Team + ' · ' : ''}${c.Role || ''}</div>
+          <h3>${c.Name || ''}</h3>
+          <p>${c.Bio || ''}</p>
+        </div>
+      </div>
+    `).join('');
+  });
+</script>
 </body>
 </html>

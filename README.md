@@ -30,14 +30,21 @@ Create one Google Sheet with three tabs, using these exact column headers:
 - `ImageURL` is a direct link to an image (upload photos to Google Drive,
   Imgur, or similar, and use the direct image link — not a share link)
 
-See `data/sample-schedule.csv`, `data/sample-roster.csv`, and
-`data/sample-photos.csv` in this folder for the exact format — the live site
-falls back to these sample files automatically until the real sheet is
-connected, so the site never looks broken or empty.
+**Coaches tab**
+`Team, Role, Name, Bio, Photo`
+- `Team` can be `Varsity`, `JV`, `Freshman`, or left blank for a coach not
+  tied to one team level
+- `Photo` is a direct image link, same rule as the Photos tab above
+
+See `data/sample-schedule.csv`, `data/sample-roster.csv`,
+`data/sample-photos.csv`, and `data/sample-coaches.csv` in this folder for
+the exact format — the live site falls back to these sample files
+automatically until the real sheet is connected, so the site never looks
+broken or empty.
 
 ## 2. Publish each tab as CSV
 
-For each of the three tabs:
+For each of the four tabs:
 1. File > Share > Publish to web
 2. Under "Link", choose the specific sheet/tab (not "Entire document")
 3. Choose "Comma-separated values (.csv)" as the format
@@ -45,14 +52,15 @@ For each of the three tabs:
 
 ## 3. Paste the links into the config
 
-Open `js/config.js` and replace the three placeholder values under
+Open `js/config.js` and replace the four placeholder values under
 `sheets` with the links from step 2:
 
 ```js
 sheets: {
   schedule: "https://docs.google.com/.../pub?output=csv",
   roster: "https://docs.google.com/.../pub?output=csv",
-  photos: "https://docs.google.com/.../pub?output=csv"
+  photos: "https://docs.google.com/.../pub?output=csv",
+  coaches: "https://docs.google.com/.../pub?output=csv"
 }
 ```
 
@@ -69,7 +77,6 @@ sheets: {
 
 ## 5. Replace placeholder content
 
-- `coaches.html` — swap in real coach names, roles, and photos
 - `assets/logo.png` — already set to the real Hart Hawks logo
 
 ## 6. Publish with GitHub Pages
@@ -82,8 +89,8 @@ sheets: {
 
 ## Updating the site day to day
 
-- **New game, updated score, new roster entry, new photo** — edit the Google
-  Sheet. The site updates automatically within a few minutes (Google's
-  publish-to-web cache refreshes periodically).
-- **Coach info, donation links, social links, gear store link** — edit the
+- **New game, updated score, new roster entry, new photo, coach update** —
+  edit the Google Sheet. The site updates automatically within a few
+  minutes (Google's publish-to-web cache refreshes periodically).
+- **Donation links, social links, gear store link** — edit the
   relevant HTML file or `js/config.js` directly and re-push to GitHub.
