@@ -161,7 +161,7 @@ nav.primary-nav a.active {
 .hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(115deg, var(--red) 0 52%, var(--black) 52% 100%);
+  background: linear-gradient(115deg, var(--black) 0 52%, var(--red) 52% 100%);
   padding: 76px 0 64px;
 }
 
@@ -192,6 +192,20 @@ nav.primary-nav a.active {
   gap: 14px;
   margin-top: 28px;
   flex-wrap: wrap;
+}
+
+.hero-mascot {
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  z-index: 1;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.35));
+}
+
+@media (max-width: 900px) {
+  .hero-mascot { display: none; }
 }
 
 .btn {
