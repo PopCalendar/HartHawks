@@ -48,3 +48,27 @@ function splitCSVLine(line) {
   result.push(cur);
   return result;
 }
+
+/**
+ * List every image file inside a folder in the site's GitHub repo, using
+ * GitHub's public contents API. Returns an array of direct image URLs,
+ * sorted by file name. Returns an empty array if the folder doesn't exist
+ * yet or the lookup fails for any reason (e.g. hitting GitHub's public rate
+ * limit), so callers should handle an empty result gracefully.
+ */
+async function fetchFolderImages(folderPath) {
+  const { owner, name, branch } = SITE_CONFIG.repo;
+  const cleanPath = folderPath.replace(/^\/+|\/+$/g, '');
+  const url = `https://api.github.com/repos/${owner}/${name}/contents/${cleanPath}?ref=${branch}`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('folder not found');
+    const data = await res.json();
+    return data
+      .filter(f => f.type === 'file' && /\.(jpe?g|png|gif|webp)$/i.test(f.name))
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
+      .map(f => f.download_url);
+  } catch (err) {
+    return [];
+  }
+}

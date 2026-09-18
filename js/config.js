@@ -42,5 +42,13 @@ const SITE_CONFIG = {
   // Gear / spirit wear store
   gearStoreUrl: "PLACEHOLDER_GEAR_STORE_URL",
 
+  // Your GitHub repo info — needed so the site can look up what's inside a
+  // photo album folder automatically. Already set to your repo.
+  repo: {
+    owner: "PopCalendar",
+    name: "HartHawks",
+    branch: "main"
+  },
+
   teamLevels: ["Varsity", "JV", "Freshman"]
 };

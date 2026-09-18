@@ -26,9 +26,17 @@ Create one Google Sheet with three tabs, using these exact column headers:
 `Team, Number, Name, Position, Grade`
 
 **Photos tab**
-`Team, Caption, ImageURL`
-- `ImageURL` is a direct link to an image (upload photos to Google Drive,
-  Imgur, or similar, and use the direct image link — not a share link)
+`Team, Caption, Folder`
+- Each row is one **album**, not one photo
+- `Folder` is the path to a folder in this GitHub repo containing all the
+  photos for that event — e.g. `Photos/OpeningDay`
+- Upload every photo for that event into that exact folder (same upload
+  process as the Opponents and Coaches folders — see "Adding photos to an
+  album" below). The site automatically finds and shows every image in
+  that folder when someone clicks the album card, with a photo viewer
+  (arrows to go through them, click to close)
+- The first photo in the folder (alphabetically) becomes the album's cover
+  thumbnail automatically — no separate cover image needed
 
 **Coaches tab**
 `Team, Role, Name, Bio, Photo`
@@ -95,6 +103,29 @@ sheets: {
 3. Your site will be live at `https://<username>.github.io/<repo-name>/`
 4. Point your custom domain at it under Settings > Pages > Custom domain, if
    you have one
+
+## Adding photos to an album
+
+1. In your GitHub repo, create a folder for the event — e.g. a folder
+   named `Photos`, and inside it, one subfolder per event like
+   `Photos/OpeningDay`. (To create a new folder on GitHub: "Add file >
+   Create new file", then type the full path like
+   `Photos/OpeningDay/placeholder.txt` in the file name box — GitHub
+   creates the folders automatically. See the full walkthrough for this in
+   past chat history if you need the detailed steps.)
+2. Upload all the photos for that event into that folder.
+3. In the spreadsheet's Photos tab, add one row: `Team`, a `Caption`
+   (used as the album title), and `Folder` set to that exact path, e.g.
+   `Photos/OpeningDay`.
+4. That's it — the album card appears on Hart Pride automatically, using
+   the first photo as the cover, and clicking it shows every photo in
+   that folder.
+
+This relies on GitHub's public API to list the folder's contents, which
+has a modest rate limit for a site with no sign-in (currently 60 requests
+per hour per visitor's network). For a small team site's traffic this is
+normally a complete non-issue — but if album covers ever fail to load
+after a lot of activity, that's why, and they'll recover within the hour.
 
 ## Updating the site day to day
 

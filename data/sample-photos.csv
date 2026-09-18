@@ -1,5 +1,5 @@
-Team,Caption,ImageURL
-Varsity,Opening day 2026,https://placehold.co/600x400?text=Opening+Day
-Varsity,Red vs Black scrimmage,https://placehold.co/600x400?text=Red+vs+Black
-JV,Practice at Hart Field,https://placehold.co/600x400?text=JV+Practice
-Freshman,First team photo,https://placehold.co/600x400?text=Freshman+Team
+Team,Caption,Folder
+Varsity,Opening day 2026,Photos/OpeningDay
+Varsity,Red vs Black scrimmage,Photos/RedVsBlack
+JV,Practice at Hart Field,Photos/JVPractice
+Freshman,First team photo,Photos/FreshmanTeam

@@ -58,9 +58,22 @@
       <h2>Photo gallery</h2>
       <span class="tag">HART PRIDE</span>
     </div>
-    <div class="placeholder-note">Photos below pull from the Photos tab of the team spreadsheet (SITE_CONFIG.sheets.photos in js/config.js). Add a row with Team, Caption, and an image URL to add a new photo.</div>
+    <div class="placeholder-note">Each card is a photo album. In the Photos tab of the spreadsheet (SITE_CONFIG.sheets.photos in js/config.js), each row is one album: Team, Caption, and a Folder path pointing to a folder of photos in your GitHub repo — e.g. Photos/OpeningDay. Upload all the photos for that event into that folder and they'll all show up automatically when someone clicks the card.</div>
 
     <div class="card-grid" id="photoGrid"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="albumModal">
+  <div class="modal-box modal-box-wide">
+    <button class="modal-close" id="albumClose" aria-label="Close">&times;</button>
+    <div class="album-title" id="albumTitle"></div>
+    <div class="album-viewer">
+      <button class="album-nav prev" id="albumPrev" aria-label="Previous">&#8249;</button>
+      <img id="albumImage" src="" alt="">
+      <button class="album-nav next" id="albumNext" aria-label="Next">&#8250;</button>
+    </div>
+    <div class="album-counter" id="albumCounter"></div>
   </div>
 </div>
 
@@ -73,22 +86,54 @@
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
 <script>
+  let ALBUM_IMAGES = [];
+  let ALBUM_INDEX = 0;
+
   document.addEventListener('DOMContentLoaded', async () => {
-    const photos = await fetchSheet(SITE_CONFIG.sheets.photos, 'data/sample-photos.csv');
+    const albums = await fetchSheet(SITE_CONFIG.sheets.photos, 'data/sample-photos.csv');
     const grid = document.getElementById('photoGrid');
-    if (!photos.length) {
-      grid.innerHTML = '<p>No photos posted yet.</p>';
+    if (!albums.length) {
+      grid.innerHTML = '<p>No photo albums posted yet.</p>';
     } else {
-      grid.innerHTML = photos.map(p => `
-        <div class="gear-card">
-          <div class="photo" style="background-image:url('${p.ImageURL}'); background-size:cover; background-position:center;"></div>
+      grid.innerHTML = albums.map((a, i) => `
+        <button class="album-card" data-index="${i}">
+          <div class="photo" id="cover-${i}" style="background-size:cover; background-position:center; background-color:#e7e3da;"></div>
           <div class="body">
-            <div class="role">${p.Team || ''}</div>
-            <p style="margin:4px 0 0;">${p.Caption || ''}</p>
+            <div class="role">${a.Team || ''}</div>
+            <p style="margin:4px 0 0;">${a.Caption || ''}</p>
           </div>
-        </div>
+        </button>
       `).join('');
+
+      // Load a cover image for each album card in the background
+      albums.forEach(async (a, i) => {
+        const images = await fetchFolderImages(a.Folder || '');
+        const coverEl = document.getElementById(`cover-${i}`);
+        if (images.length && coverEl) {
+          coverEl.style.backgroundImage = `url('${images[0]}')`;
+        }
+      });
+
+      grid.querySelectorAll('.album-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const a = albums[card.dataset.index];
+          openAlbum(a.Caption || a.Team || 'Album', a.Folder || '');
+        });
+      });
     }
+
+    document.getElementById('albumClose').addEventListener('click', closeAlbum);
+    document.getElementById('albumModal').addEventListener('click', (e) => {
+      if (e.target.id === 'albumModal') closeAlbum();
+    });
+    document.getElementById('albumPrev').addEventListener('click', () => stepAlbum(-1));
+    document.getElementById('albumNext').addEventListener('click', () => stepAlbum(1));
+    document.addEventListener('keydown', (e) => {
+      if (!document.getElementById('albumModal').classList.contains('open')) return;
+      if (e.key === 'Escape') closeAlbum();
+      if (e.key === 'ArrowLeft') stepAlbum(-1);
+      if (e.key === 'ArrowRight') stepAlbum(1);
+    });
 
     const news = await fetchSheet(SITE_CONFIG.sheets.news, 'data/sample-news.csv');
     const archive = document.getElementById('newsArchive');
@@ -110,6 +155,39 @@
       `;
     }).join('');
   });
+
+  async function openAlbum(title, folder) {
+    document.getElementById('albumTitle').textContent = title;
+    document.getElementById('albumImage').src = '';
+    document.getElementById('albumCounter').textContent = 'Loading…';
+    document.getElementById('albumModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    ALBUM_IMAGES = await fetchFolderImages(folder);
+    ALBUM_INDEX = 0;
+
+    if (!ALBUM_IMAGES.length) {
+      document.getElementById('albumCounter').textContent = 'No photos found in this album yet.';
+      return;
+    }
+    showAlbumImage();
+  }
+
+  function showAlbumImage() {
+    document.getElementById('albumImage').src = ALBUM_IMAGES[ALBUM_INDEX];
+    document.getElementById('albumCounter').textContent = `${ALBUM_INDEX + 1} of ${ALBUM_IMAGES.length}`;
+  }
+
+  function stepAlbum(dir) {
+    if (!ALBUM_IMAGES.length) return;
+    ALBUM_INDEX = (ALBUM_INDEX + dir + ALBUM_IMAGES.length) % ALBUM_IMAGES.length;
+    showAlbumImage();
+  }
+
+  function closeAlbum() {
+    document.getElementById('albumModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
 </script>
 </body>
 </html>
