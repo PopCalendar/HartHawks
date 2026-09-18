@@ -36,15 +36,23 @@ Create one Google Sheet with three tabs, using these exact column headers:
   tied to one team level
 - `Photo` is a direct image link, same rule as the Photos tab above
 
+**News tab**
+`Date, Headline, Body, Photo`
+- `Date` in `YYYY-MM-DD` format
+- `Photo` is optional — a direct image link, same rule as the Photos tab.
+  Leave it blank for a text-only update.
+- The homepage automatically shows whichever row has the most recent date
+  — just add a new row for each update, no need to delete old ones
+
 See `data/sample-schedule.csv`, `data/sample-roster.csv`,
-`data/sample-photos.csv`, and `data/sample-coaches.csv` in this folder for
-the exact format — the live site falls back to these sample files
-automatically until the real sheet is connected, so the site never looks
-broken or empty.
+`data/sample-photos.csv`, `data/sample-coaches.csv`, and
+`data/sample-news.csv` in this folder for the exact format — the live site
+falls back to these sample files automatically until the real sheet is
+connected, so the site never looks broken or empty.
 
 ## 2. Publish each tab as CSV
 
-For each of the four tabs:
+For each of the five tabs:
 1. File > Share > Publish to web
 2. Under "Link", choose the specific sheet/tab (not "Entire document")
 3. Choose "Comma-separated values (.csv)" as the format
@@ -52,7 +60,7 @@ For each of the four tabs:
 
 ## 3. Paste the links into the config
 
-Open `js/config.js` and replace the four placeholder values under
+Open `js/config.js` and replace the five placeholder values under
 `sheets` with the links from step 2:
 
 ```js
@@ -60,7 +68,8 @@ sheets: {
   schedule: "https://docs.google.com/.../pub?output=csv",
   roster: "https://docs.google.com/.../pub?output=csv",
   photos: "https://docs.google.com/.../pub?output=csv",
-  coaches: "https://docs.google.com/.../pub?output=csv"
+  coaches: "https://docs.google.com/.../pub?output=csv",
+  news: "https://docs.google.com/.../pub?output=csv"
 }
 ```
 
@@ -89,8 +98,9 @@ sheets: {
 
 ## Updating the site day to day
 
-- **New game, updated score, new roster entry, new photo, coach update** —
-  edit the Google Sheet. The site updates automatically within a few
-  minutes (Google's publish-to-web cache refreshes periodically).
+- **New game, updated score, new roster entry, new photo, coach update,
+  news update** — edit the Google Sheet. The site updates automatically
+  within a few minutes (Google's publish-to-web cache refreshes
+  periodically).
 - **Donation links, social links, gear store link** — edit the
   relevant HTML file or `js/config.js` directly and re-push to GitHub.

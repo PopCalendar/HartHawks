@@ -72,7 +72,7 @@
       <h2>Latest from the diamond</h2>
       <span class="tag">HART PRIDE</span>
     </div>
-    <p>This spot is a good home for recent recaps, announcements, or a photo from the last game — swap this paragraph out for real season updates once things get rolling.</p>
+    <div id="latestNews"></div>
     <p><a href="hart-pride.html">See Hart Pride →</a></p>
   </div>
 </section>
@@ -90,7 +90,7 @@
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
     const wrap = document.getElementById('socialLinks');
     const s = SITE_CONFIG.social;
     const items = [
@@ -105,6 +105,22 @@
         wrap.appendChild(a);
       }
     });
+
+    const news = await fetchSheet(SITE_CONFIG.sheets.news, 'data/sample-news.csv');
+    const newsWrap = document.getElementById('latestNews');
+    if (!news.length) {
+      newsWrap.innerHTML = '<p>No updates posted yet — check back soon.</p>';
+      return;
+    }
+    const latest = news.slice().sort((a, b) => new Date(b.Date) - new Date(a.Date))[0];
+    const d = new Date(latest.Date + 'T00:00:00');
+    const dateLabel = isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    newsWrap.innerHTML = `
+      <p style="color:var(--muted); font-size:0.9rem; margin-bottom:4px;">${dateLabel}</p>
+      <h3 style="margin-bottom:8px;">${latest.Headline || ''}</h3>
+      ${latest.Photo ? `<img src="${latest.Photo}" alt="${latest.Headline || ''}" style="width:100%; max-width:560px; display:block; margin-bottom:14px; border:1px solid var(--line);">` : ''}
+      <p>${latest.Body || ''}</p>
+    `;
   });
 </script>
 </body>
