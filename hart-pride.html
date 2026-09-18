@@ -44,6 +44,20 @@
 
 <div class="section">
   <div class="container">
+    <div class="section-head">
+      <h2>News &amp; recaps</h2>
+      <span class="tag">ARCHIVE</span>
+    </div>
+    <div id="newsArchive"></div>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <h2>Photo gallery</h2>
+      <span class="tag">HART PRIDE</span>
+    </div>
     <div class="placeholder-note">Photos below pull from the Photos tab of the team spreadsheet (SITE_CONFIG.sheets.photos in js/config.js). Add a row with Team, Caption, and an image URL to add a new photo.</div>
 
     <div class="card-grid" id="photoGrid"></div>
@@ -64,17 +78,37 @@
     const grid = document.getElementById('photoGrid');
     if (!photos.length) {
       grid.innerHTML = '<p>No photos posted yet.</p>';
+    } else {
+      grid.innerHTML = photos.map(p => `
+        <div class="gear-card">
+          <div class="photo" style="background-image:url('${p.ImageURL}'); background-size:cover; background-position:center;"></div>
+          <div class="body">
+            <div class="role">${p.Team || ''}</div>
+            <p style="margin:4px 0 0;">${p.Caption || ''}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    const news = await fetchSheet(SITE_CONFIG.sheets.news, 'data/sample-news.csv');
+    const archive = document.getElementById('newsArchive');
+    if (!news.length) {
+      archive.innerHTML = '<p>No updates posted yet.</p>';
       return;
     }
-    grid.innerHTML = photos.map(p => `
-      <div class="gear-card">
-        <div class="photo" style="background-image:url('${p.ImageURL}'); background-size:cover; background-position:center;"></div>
-        <div class="body">
-          <div class="role">${p.Team || ''}</div>
-          <p style="margin:4px 0 0;">${p.Caption || ''}</p>
-        </div>
-      </div>
-    `).join('');
+    const sorted = news.slice().sort((a, b) => new Date(b.Date) - new Date(a.Date));
+    archive.innerHTML = sorted.map(n => {
+      const d = new Date(n.Date + 'T00:00:00');
+      const dateLabel = isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      return `
+        <article style="border-bottom:1px solid var(--line); padding:20px 0;">
+          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:4px;">${dateLabel}</p>
+          <h3 style="margin-bottom:8px;">${n.Headline || ''}</h3>
+          ${n.Photo ? `<img src="${n.Photo}" alt="${n.Headline || ''}" style="width:100%; max-width:560px; display:block; margin-bottom:12px; border:1px solid var(--line);">` : ''}
+          <p>${n.Body || ''}</p>
+        </article>
+      `;
+    }).join('');
   });
 </script>
 </body>
