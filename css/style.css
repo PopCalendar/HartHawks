@@ -480,6 +480,73 @@ table.roster td.jersey {
 .coach-card .body, .gear-card .body { padding: 14px 16px; }
 .coach-card .role { color: var(--red); font-size: 0.85rem; font-weight: 600; }
 
+.btn-bio {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: var(--red);
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+.btn-bio:hover { color: var(--red-dark); }
+
+/* ---- Coach bio modal ---- */
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 18, 18, 0.72);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+  background: var(--paper);
+  max-width: 480px;
+  width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 28px;
+  position: relative;
+  border-top: 4px solid var(--red);
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+}
+.modal-close:hover { color: var(--black); }
+
+.modal-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-bottom: 16px;
+  background: #e7e3da;
+}
+
+.modal-role {
+  color: var(--red);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
 /* ---- Donate page ---- */
 
 .donate-grid {

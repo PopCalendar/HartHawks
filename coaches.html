@@ -50,6 +50,16 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="coachModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <img class="modal-photo" id="modalPhoto" src="" alt="">
+    <div class="modal-role" id="modalRole"></div>
+    <h3 id="modalName"></h3>
+    <p id="modalBio"></p>
+  </div>
+</div>
+
 <footer class="site-footer">
   <div class="container">
     <div class="brand-text" style="color:#fff;">HART HAWKS BASEBALL</div>
@@ -59,24 +69,53 @@
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
 <script>
+  let COACH_DATA = [];
+
   document.addEventListener('DOMContentLoaded', async () => {
-    const coaches = await fetchSheet(SITE_CONFIG.sheets.coaches, 'data/sample-coaches.csv');
+    COACH_DATA = await fetchSheet(SITE_CONFIG.sheets.coaches, 'data/sample-coaches.csv');
     const grid = document.getElementById('coachGrid');
-    if (!coaches.length) {
+    if (!COACH_DATA.length) {
       grid.innerHTML = '<p>Coach list not posted yet.</p>';
       return;
     }
-    grid.innerHTML = coaches.map(c => `
+    grid.innerHTML = COACH_DATA.map((c, i) => `
       <div class="coach-card">
         <div class="photo" style="background-image:url('${c.Photo}'); background-size:cover; background-position:center;"></div>
         <div class="body">
           <div class="role">${c.Team ? c.Team + ' · ' : ''}${c.Role || ''}</div>
           <h3>${c.Name || ''}</h3>
-          <p>${c.Bio || ''}</p>
+          <button class="btn-bio" data-index="${i}">Read bio →</button>
         </div>
       </div>
     `).join('');
+
+    grid.querySelectorAll('.btn-bio').forEach(btn => {
+      btn.addEventListener('click', () => openCoachModal(COACH_DATA[btn.dataset.index]));
+    });
+
+    document.getElementById('modalClose').addEventListener('click', closeCoachModal);
+    document.getElementById('coachModal').addEventListener('click', (e) => {
+      if (e.target.id === 'coachModal') closeCoachModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeCoachModal();
+    });
   });
+
+  function openCoachModal(c) {
+    document.getElementById('modalPhoto').src = c.Photo || '';
+    document.getElementById('modalPhoto').alt = c.Name || '';
+    document.getElementById('modalRole').textContent = `${c.Team ? c.Team + ' · ' : ''}${c.Role || ''}`;
+    document.getElementById('modalName').textContent = c.Name || '';
+    document.getElementById('modalBio').textContent = c.Bio || '';
+    document.getElementById('coachModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCoachModal() {
+    document.getElementById('coachModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
 </script>
 </body>
 </html>
