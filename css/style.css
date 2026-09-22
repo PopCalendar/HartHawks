@@ -499,6 +499,41 @@ table.roster td.jersey {
 .coach-card .body, .gear-card .body { padding: 14px 16px; }
 .coach-card .role { color: var(--red); font-size: 0.85rem; font-weight: 600; }
 
+/* ---- Alumni (baseball-card sized photos, name above team lines) ---- */
+
+.player-card .photo {
+  aspect-ratio: 2.5 / 3.5;
+  background-color: #e7e3da;
+}
+
+.player-card .body { padding: 14px 16px; }
+
+.player-card .teams {
+  margin: 4px 0 10px;
+}
+.player-card .teams .team-line {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.modal-photo-card {
+  width: 240px;
+  aspect-ratio: 2.5 / 3.5;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 16px;
+  background: #e7e3da;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.modal-teams { margin: 6px 0 14px; }
+.modal-teams .team-line {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .btn-bio {
   margin-top: 8px;
   background: none;
