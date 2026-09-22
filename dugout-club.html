@@ -49,55 +49,7 @@
       <p>Everything about the Dugout Club lives in one of the six lockers below.</p>
     </div>
 
-    <div class="locker-row">
-      <button class="locker" data-section="about">
-        <div class="locker-vent"><span></span><span></span></div>
-        <div class="locker-tag">ABOUT</div>
-        <div class="locker-emblem">H</div>
-        <div class="locker-handle"></div>
-        <div class="locker-bench"></div>
-      </button>
-
-      <button class="locker" data-section="board">
-        <div class="locker-vent"><span></span><span></span></div>
-        <div class="locker-tag">BOARD</div>
-        <div class="locker-emblem">H</div>
-        <div class="locker-handle"></div>
-        <div class="locker-bench"></div>
-      </button>
-
-      <button class="locker" data-section="sponsors">
-        <div class="locker-vent"><span></span><span></span></div>
-        <div class="locker-tag">SPONSORS</div>
-        <div class="locker-emblem">H</div>
-        <div class="locker-handle"></div>
-        <div class="locker-bench"></div>
-      </button>
-
-      <button class="locker" data-section="events">
-        <div class="locker-vent"><span></span><span></span></div>
-        <div class="locker-tag">EVENTS</div>
-        <div class="locker-emblem">H</div>
-        <div class="locker-handle"></div>
-        <div class="locker-bench"></div>
-      </button>
-
-      <button class="locker" data-section="donate">
-        <div class="locker-vent"><span></span><span></span></div>
-        <div class="locker-tag">DONATE</div>
-        <div class="locker-emblem">H</div>
-        <div class="locker-handle"></div>
-        <div class="locker-bench"></div>
-      </button>
-
-      <button class="locker" data-section="bylaws">
-        <div class="locker-vent"><span></span><span></span></div>
-        <div class="locker-tag">BYLAWS</div>
-        <div class="locker-emblem">H</div>
-        <div class="locker-handle"></div>
-        <div class="locker-bench"></div>
-      </button>
-    </div>
+    <div class="locker-row" id="lockerRow"></div>
   </div>
 </div>
 
@@ -185,7 +137,42 @@
     }
   };
 
+  const JERSEY_SVG = `
+    <svg class="locker-jersey" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 6 C46 6 46 12 50 12 C54 12 54 6 50 6 Z" fill="none" stroke="#999" stroke-width="2"/>
+      <line x1="50" y1="12" x2="30" y2="20" stroke="#999" stroke-width="2"/>
+      <line x1="50" y1="12" x2="70" y2="20" stroke="#999" stroke-width="2"/>
+      <path d="M50 18 L20 18 L4 38 L16 50 L30 36 L30 80 Q30 106 50 110 Q70 106 70 80 L70 36 L84 50 L96 38 L80 18 Z" fill="#f6f3ec" stroke="#111" stroke-width="2"/>
+      <path d="M4 38 L16 50 L22 44 L12 32 Z" fill="#c8102e"/>
+      <path d="M96 38 L84 50 L78 44 L88 32 Z" fill="#c8102e"/>
+      <path d="M40 18 L50 32 L60 18" fill="none" stroke="#c8102e" stroke-width="3"/>
+      <line x1="50" y1="32" x2="50" y2="80" stroke="#c8102e" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <text x="50" y="65" font-family="Oswald, sans-serif" font-weight="700" font-size="22" fill="#c8102e" text-anchor="middle">H</text>
+    </svg>
+  `;
+
+  const LOCKER_SECTIONS = [
+    { key: 'about', label: 'About' },
+    { key: 'board', label: 'Board' },
+    { key: 'sponsors', label: 'Sponsors' },
+    { key: 'events', label: 'Events' },
+    { key: 'donate', label: 'Donate' },
+    { key: 'bylaws', label: 'Bylaws' }
+  ];
+
   document.addEventListener('DOMContentLoaded', () => {
+    const row = document.getElementById('lockerRow');
+    row.innerHTML = LOCKER_SECTIONS.map(s => `
+      <button class="locker" data-section="${s.key}">
+        <div class="locker-shelf"><div class="locker-tag">${s.label.toUpperCase()}</div></div>
+        <div class="locker-door">
+          ${JERSEY_SVG}
+          <div class="locker-vent"><span></span><span></span></div>
+        </div>
+        <div class="locker-bench"></div>
+      </button>
+    `).join('');
+
     document.querySelectorAll('.locker').forEach(locker => {
       locker.addEventListener('click', () => openLocker(locker.dataset.section));
     });
