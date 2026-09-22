@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gear — Hart Hawks Baseball</title>
+<title>News & Recaps — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -48,16 +48,14 @@
 
 <div class="page-header">
   <div class="container">
-    <h1>Gear</h1>
-    <p>Spirit wear and team gear.</p>
+    <h1>News & Recaps</h1>
+    <p>Updates, results, and recaps from the season.</p>
   </div>
 </div>
 
 <div class="section">
   <div class="container">
-    <div class="placeholder-note">Set SITE_CONFIG.gearStoreUrl in js/config.js once the store is live.</div>
-    <p>Order Hawks spirit wear through our online store — hats, tees, hoodies, and more.</p>
-    <p><a class="btn btn-solid" style="border-color:var(--black); color:var(--black); background:var(--paper);" id="gearLink" href="#" target="_blank" rel="noopener">Shop Hawks gear →</a></p>
+    <div id="newsArchive"></div>
   </div>
 </div>
 
@@ -70,8 +68,26 @@
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('gearLink').href = SITE_CONFIG.gearStoreUrl;
+  document.addEventListener('DOMContentLoaded', async () => {
+    const news = await fetchSheet(SITE_CONFIG.sheets.news, 'data/sample-news.csv');
+    const archive = document.getElementById('newsArchive');
+    if (!news.length) {
+      archive.innerHTML = '<p>No updates posted yet.</p>';
+      return;
+    }
+    const sorted = news.slice().sort((a, b) => new Date(b.Date) - new Date(a.Date));
+    archive.innerHTML = sorted.map(n => {
+      const d = new Date(n.Date + 'T00:00:00');
+      const dateLabel = isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      return `
+        <article style="border-bottom:1px solid var(--line); padding:20px 0;">
+          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:4px;">${dateLabel}</p>
+          <h3 style="margin-bottom:8px;">${n.Headline || ''}</h3>
+          ${n.Photo ? `<img src="${n.Photo}" alt="${n.Headline || ''}" style="width:100%; max-width:560px; display:block; margin-bottom:12px; border:1px solid var(--line);">` : ''}
+          <p>${n.Body || ''}</p>
+        </article>
+      `;
+    }).join('');
   });
 </script>
 </body>
