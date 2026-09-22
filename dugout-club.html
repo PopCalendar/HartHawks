@@ -46,10 +46,31 @@
   <div class="container">
     <div class="locker-room-head">
       <h2>Suit up — pick a locker</h2>
-      <p>Everything about the Dugout Club lives in one of the six lockers below.</p>
+      <p>Click a jersey to open that section.</p>
     </div>
 
-    <div class="locker-row" id="lockerRow"></div>
+    <div class="locker-photo-wrap">
+      <img class="locker-photo" src="assets/locker-room.jpg" alt="Hart Hawks baseball locker room">
+
+      <button class="locker-hotspot" data-section="about" style="left:24.56%; top:37.11%; width:8.72%; height:38.41%;">
+        <span class="locker-label">About</span>
+      </button>
+      <button class="locker-hotspot" data-section="board" style="left:33.28%; top:37.11%; width:8.51%; height:38.41%;">
+        <span class="locker-label">Board</span>
+      </button>
+      <button class="locker-hotspot" data-section="sponsors" style="left:41.79%; top:37.11%; width:8.72%; height:38.41%;">
+        <span class="locker-label">Sponsors</span>
+      </button>
+      <button class="locker-hotspot" data-section="events" style="left:50.51%; top:37.11%; width:8.36%; height:38.41%;">
+        <span class="locker-label">Events</span>
+      </button>
+      <button class="locker-hotspot" data-section="donate" style="left:58.87%; top:37.11%; width:8.57%; height:38.41%;">
+        <span class="locker-label">Donate</span>
+      </button>
+      <button class="locker-hotspot" data-section="bylaws" style="left:67.44%; top:37.11%; width:8.51%; height:38.41%;">
+        <span class="locker-label">Bylaws</span>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -137,44 +158,9 @@
     }
   };
 
-  const JERSEY_SVG = `
-    <svg class="locker-jersey" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 6 C46 6 46 12 50 12 C54 12 54 6 50 6 Z" fill="none" stroke="#999" stroke-width="2"/>
-      <line x1="50" y1="12" x2="30" y2="20" stroke="#999" stroke-width="2"/>
-      <line x1="50" y1="12" x2="70" y2="20" stroke="#999" stroke-width="2"/>
-      <path d="M50 18 L20 18 L4 38 L16 50 L30 36 L30 80 Q30 106 50 110 Q70 106 70 80 L70 36 L84 50 L96 38 L80 18 Z" fill="#f6f3ec" stroke="#111" stroke-width="2"/>
-      <path d="M4 38 L16 50 L22 44 L12 32 Z" fill="#c8102e"/>
-      <path d="M96 38 L84 50 L78 44 L88 32 Z" fill="#c8102e"/>
-      <path d="M40 18 L50 32 L60 18" fill="none" stroke="#c8102e" stroke-width="3"/>
-      <line x1="50" y1="32" x2="50" y2="80" stroke="#c8102e" stroke-width="1.5" stroke-dasharray="3,3"/>
-      <text x="50" y="65" font-family="Oswald, sans-serif" font-weight="700" font-size="22" fill="#c8102e" text-anchor="middle">H</text>
-    </svg>
-  `;
-
-  const LOCKER_SECTIONS = [
-    { key: 'about', label: 'About' },
-    { key: 'board', label: 'Board' },
-    { key: 'sponsors', label: 'Sponsors' },
-    { key: 'events', label: 'Events' },
-    { key: 'donate', label: 'Donate' },
-    { key: 'bylaws', label: 'Bylaws' }
-  ];
-
   document.addEventListener('DOMContentLoaded', () => {
-    const row = document.getElementById('lockerRow');
-    row.innerHTML = LOCKER_SECTIONS.map(s => `
-      <button class="locker" data-section="${s.key}">
-        <div class="locker-shelf"><div class="locker-tag">${s.label.toUpperCase()}</div></div>
-        <div class="locker-door">
-          ${JERSEY_SVG}
-          <div class="locker-vent"><span></span><span></span></div>
-        </div>
-        <div class="locker-bench"></div>
-      </button>
-    `).join('');
-
-    document.querySelectorAll('.locker').forEach(locker => {
-      locker.addEventListener('click', () => openLocker(locker.dataset.section));
+    document.querySelectorAll('.locker-hotspot').forEach(hotspot => {
+      hotspot.addEventListener('click', () => openLocker(hotspot.dataset.section));
     });
     document.getElementById('lockerModalClose').addEventListener('click', closeLocker);
     document.getElementById('lockerModal').addEventListener('click', (e) => {
