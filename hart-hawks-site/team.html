@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team — Hart Hawks Baseball</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Hart Hawks logo">
+      <span class="brand-text">HART HAWKS<small>Baseball</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">Menu</button>
+    <nav class="primary-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html" class="active">Team</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="stats.html">Stats</a></li>
+        <li class="has-dropdown">
+          <a href="#">Hart Pride ▾</a>
+          <div class="dropdown">
+            <a href="photo-gallery.html">Photo Gallery</a>
+            <a href="news-recaps.html">News &amp; Recaps</a>
+            <a href="press-room.html">Press Room</a>
+            <a href="alumni.html">Alumni</a>
+            <a href="tradition-of-champions.html">Tradition of Champions</a>
+            <a href="history.html">History</a>
+            <a href="archived-clippings.html">Archived Clippings</a>
+          </div>
+        </li>
+        <li class="has-dropdown">
+          <a href="#">Support ▾</a>
+          <div class="dropdown">
+            <a href="dugout-club.html">Dugout Club</a>
+            <a href="gear.html">Gear</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <h1>Team</h1>
+    <p>Rosters for all three levels — updated straight from the team spreadsheet.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+
+    <div class="team-tabs">
+      <button class="team-tab active" data-team="Varsity">Varsity</button>
+      <button class="team-tab" data-team="JV">JV</button>
+      <button class="team-tab" data-team="Freshman">Freshman</button>
+    </div>
+
+    <table class="roster">
+      <thead>
+        <tr><th>#</th><th>Name</th><th>Position</th><th>Grade</th></tr>
+      </thead>
+      <tbody id="rosterBody"></tbody>
+    </table>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand-text" style="color:#fff;">HART HAWKS BASEBALL</div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script src="js/team.js"></script>
+</body>
+</html>

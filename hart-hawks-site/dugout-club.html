@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dugout Club — Hart Hawks Baseball</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Hart Hawks logo">
+      <span class="brand-text">HART HAWKS<small>Baseball</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">Menu</button>
+    <nav class="primary-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="stats.html">Stats</a></li>
+        <li class="has-dropdown">
+          <a href="#">Hart Pride ▾</a>
+          <div class="dropdown">
+            <a href="photo-gallery.html">Photo Gallery</a>
+            <a href="news-recaps.html">News &amp; Recaps</a>
+            <a href="press-room.html">Press Room</a>
+            <a href="alumni.html">Alumni</a>
+            <a href="tradition-of-champions.html">Tradition of Champions</a>
+            <a href="history.html">History</a>
+            <a href="archived-clippings.html">Archived Clippings</a>
+          </div>
+        </li>
+        <li class="has-dropdown">
+          <a href="#">Support ▾</a>
+          <div class="dropdown">
+            <a href="dugout-club.html">Dugout Club</a>
+            <a href="gear.html">Gear</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <h1>Dugout Club</h1>
+    <p>The booster club behind Hart Hawks Baseball — step into the locker room to learn more.</p>
+  </div>
+</div>
+
+<div class="locker-room">
+  <div class="container">
+    <div class="locker-room-head">
+      <h2>Suit up — pick a locker</h2>
+      <p>Click a jersey to open that section.</p>
+    </div>
+
+    <div class="locker-photo-wrap">
+      <img class="locker-photo" src="assets/locker-room.jpg" alt="Hart Hawks baseball locker room">
+
+      <button class="locker-hotspot" data-section="about" style="left:24.56%; top:37.11%; width:8.72%; height:38.41%;">
+        <span class="locker-label">About</span>
+      </button>
+      <button class="locker-hotspot" data-section="board" style="left:33.28%; top:37.11%; width:8.51%; height:38.41%;">
+        <span class="locker-label">Board</span>
+      </button>
+      <button class="locker-hotspot" data-section="sponsors" style="left:41.79%; top:37.11%; width:8.72%; height:38.41%;">
+        <span class="locker-label">Sponsors</span>
+      </button>
+      <button class="locker-hotspot" data-section="events" style="left:50.51%; top:37.11%; width:8.36%; height:38.41%;">
+        <span class="locker-label">Events</span>
+      </button>
+      <button class="locker-hotspot" data-section="donate" style="left:58.87%; top:37.11%; width:8.57%; height:38.41%;">
+        <span class="locker-label">Donate</span>
+      </button>
+      <button class="locker-hotspot" data-section="bylaws" style="left:67.44%; top:37.11%; width:8.51%; height:38.41%;">
+        <span class="locker-label">Bylaws</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="lockerModal">
+  <div class="modal-box modal-box-wide">
+    <button class="modal-close" id="lockerModalClose" aria-label="Close">&times;</button>
+    <div class="modal-role" id="lockerModalTag"></div>
+    <h3 id="lockerModalTitle"></h3>
+    <div class="locker-modal-body" id="lockerModalBody"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand-text" style="color:#fff;">HART HAWKS BASEBALL</div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const LOCKER_CONTENT = {
+    about: {
+      tag: "ABOUT",
+      title: "About the Dugout Club",
+      body: `
+        <div class="placeholder-note">Placeholder text — edit the "about" entry in the LOCKER_CONTENT object near the bottom of dugout-club.html to add your real About copy.</div>
+        <p>The Dugout Club is the parent-run booster organization supporting Hart Hawks Baseball across Varsity, JV, and Freshman. We fund equipment, field maintenance, travel, and everything else that keeps the season running.</p>
+      `
+    },
+    board: {
+      tag: "BOARD",
+      title: "Board Members",
+      body: `
+        <p><strong>President:</strong> Chris Frithsmith</p>
+        <p><strong>Vice President:</strong> Jose Molina &amp; Moises Cortez</p>
+        <p><strong>Treasurer:</strong> Thann Illum &amp; Chad Anaya</p>
+        <p><strong>Secretary:</strong> Judy Molina</p>
+        <p><strong>Member at Large:</strong> Catie Anaya</p>
+      `
+    },
+    sponsors: {
+      tag: "SPONSORS",
+      title: "Our Sponsors",
+      body: `
+        <div class="placeholder-note">Placeholder — edit the "sponsors" entry in dugout-club.html to list real sponsor names/logos once you have them.</div>
+        <p>Thank you to the local businesses supporting Hart Hawks Baseball this season. Sponsor names and logos go here.</p>
+      `
+    },
+    events: {
+      tag: "EVENTS",
+      title: "Upcoming Events",
+      body: `
+        <div class="placeholder-note">Placeholder — edit the "events" entry in dugout-club.html, or ask to have this pull from a spreadsheet tab like the other pages if it'll update often.</div>
+        <p>Fundraisers, spirit nights, and volunteer sign-ups will be listed here.</p>
+      `
+    },
+    donate: {
+      tag: "DONATE",
+      title: "Support the Team",
+      body: `
+        <p>Every donation goes straight to equipment, travel, and team needs.</p>
+        <div class="donate-grid-modal">
+          <div class="donate-panel">
+            <h3>Give with PayPal</h3>
+            <p>One-time or recurring, any amount.</p>
+            <a class="btn btn-solid" style="border-color:var(--red); color:var(--paper); background:var(--red);" id="modalPaypalLink" href="#" target="_blank" rel="noopener">Donate on PayPal</a>
+          </div>
+          <div class="donate-panel">
+            <h3>Give with Zelle</h3>
+            <p>Scan to send directly, no fees.</p>
+            <img class="qr" id="modalZelleQr" src="" alt="Zelle QR code">
+            <p id="modalZelleHandle" style="font-size:0.9rem; color:var(--muted);"></p>
+          </div>
+        </div>
+      `
+    },
+    bylaws: {
+      tag: "BYLAWS",
+      title: "Bylaws & Constitution",
+      body: `
+        <p>The Hart Dugout Club's full Bylaws & Constitution, adopted October 8, 2019, covering membership, the Executive Board, officer duties, finances, and committees.</p>
+        <a class="btn btn-solid" style="border-color:var(--black); color:var(--black); background:var(--paper); margin-top:6px;" href="assets/dugout-club-bylaws.pdf" target="_blank" rel="noopener">View Bylaws PDF →</a>
+      `
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.locker-hotspot').forEach(hotspot => {
+      hotspot.addEventListener('click', () => openLocker(hotspot.dataset.section));
+    });
+    document.getElementById('lockerModalClose').addEventListener('click', closeLocker);
+    document.getElementById('lockerModal').addEventListener('click', (e) => {
+      if (e.target.id === 'lockerModal') closeLocker();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLocker();
+    });
+  });
+
+  function openLocker(key) {
+    const data = LOCKER_CONTENT[key];
+    if (!data) return;
+    document.getElementById('lockerModalTag').textContent = data.tag;
+    document.getElementById('lockerModalTitle').textContent = data.title;
+    document.getElementById('lockerModalBody').innerHTML = data.body;
+
+    if (key === 'donate') {
+      document.getElementById('modalPaypalLink').href = SITE_CONFIG.donate.paypalUrl;
+      document.getElementById('modalZelleQr').src = SITE_CONFIG.donate.zelleQrImage;
+      document.getElementById('modalZelleHandle').textContent = SITE_CONFIG.donate.zelleHandle;
+    }
+
+    document.getElementById('lockerModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLocker() {
+    document.getElementById('lockerModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</body>
+</html>

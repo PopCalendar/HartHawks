@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News & Recaps — Hart Hawks Baseball</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Hart Hawks logo">
+      <span class="brand-text">HART HAWKS<small>Baseball</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">Menu</button>
+    <nav class="primary-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="stats.html">Stats</a></li>
+        <li class="has-dropdown">
+          <a href="#">Hart Pride ▾</a>
+          <div class="dropdown">
+            <a href="photo-gallery.html">Photo Gallery</a>
+            <a href="news-recaps.html">News &amp; Recaps</a>
+            <a href="press-room.html">Press Room</a>
+            <a href="alumni.html">Alumni</a>
+            <a href="tradition-of-champions.html">Tradition of Champions</a>
+            <a href="history.html">History</a>
+            <a href="archived-clippings.html">Archived Clippings</a>
+          </div>
+        </li>
+        <li class="has-dropdown">
+          <a href="#">Support ▾</a>
+          <div class="dropdown">
+            <a href="dugout-club.html">Dugout Club</a>
+            <a href="gear.html">Gear</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <h1>News & Recaps</h1>
+    <p>Updates, results, and recaps from the season.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+    <div id="newsArchive"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand-text" style="color:#fff;">HART HAWKS BASEBALL</div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const news = await fetchSheet(SITE_CONFIG.sheets.news, 'data/sample-news.csv');
+    const archive = document.getElementById('newsArchive');
+    if (!news.length) {
+      archive.innerHTML = '<p>No updates posted yet.</p>';
+      return;
+    }
+    const sorted = news.slice().sort((a, b) => new Date(b.Date) - new Date(a.Date));
+    archive.innerHTML = sorted.map(n => {
+      const d = new Date(n.Date + 'T00:00:00');
+      const dateLabel = isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      return `
+        <article style="border-bottom:1px solid var(--line); padding:20px 0;">
+          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:4px;">${dateLabel}</p>
+          <h3 style="margin-bottom:8px;">${n.Headline || ''}</h3>
+          ${n.Photo ? `<img src="${n.Photo}" alt="${n.Headline || ''}" style="width:100%; max-width:560px; display:block; margin-bottom:12px; border:1px solid var(--line);">` : ''}
+          <p>${n.Body || ''}</p>
+        </article>
+      `;
+    }).join('');
+  });
+</script>
+</body>
+</html>
