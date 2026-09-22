@@ -772,6 +772,58 @@ table.roster td.jersey {
   .donate-grid-modal { grid-template-columns: 1fr; }
 }
 
+/* ---- Locker room photo hotspots ---- */
+
+.locker-photo-wrap {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.locker-photo {
+  width: 100%;
+  display: block;
+}
+
+.locker-hotspot {
+  position: absolute;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.locker-hotspot:hover .locker-label,
+.locker-hotspot:focus-visible .locker-label {
+  background: var(--red);
+  color: #fff;
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.locker-hotspot:hover,
+.locker-hotspot:focus-visible {
+  outline: none;
+  background: rgba(200,16,46,0.10);
+}
+
+.locker-label {
+  position: absolute;
+  top: 8.4%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #f6f3ec;
+  color: #111;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.72rem, 1.6vw, 1rem);
+  letter-spacing: 0.02em;
+  padding: 5px 10px;
+  white-space: nowrap;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.45);
+  border: 1px solid rgba(0,0,0,0.15);
+  transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease;
+}
+
 /* ---- Donate page ---- */
 
 .donate-grid {
