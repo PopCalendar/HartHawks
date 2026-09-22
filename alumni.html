@@ -49,14 +49,31 @@
 <div class="page-header">
   <div class="container">
     <h1>Alumni</h1>
-    <p>Hart Hawks Baseball alumni, past rosters, and where they are now.</p>
+    <p>Hart Hawks who went on to play at the next level.</p>
   </div>
 </div>
 
 <div class="section">
   <div class="container">
-    <div class="placeholder-note">This page is a placeholder — edit alumni.html directly to add real content, or ask to have it hooked up to a spreadsheet tab or photo-album folder like the other Hart Pride pages if it'll need regular updates.</div>
-    <p>An alumni directory or spotlight section will go here.</p>
+    <div class="placeholder-note">Alumni pull from the Alumni tab of the spreadsheet (SITE_CONFIG.sheets.alumni in js/config.js). Each row needs Category (Pro, Independent, or College), Name, Team, Years, a Photo link, and a Bio.</div>
+
+    <div class="team-tabs">
+      <button class="team-tab active" data-category="Pro">Pro</button>
+      <button class="team-tab" data-category="Independent">Independent</button>
+      <button class="team-tab" data-category="College">College</button>
+    </div>
+
+    <div class="card-grid" id="alumniGrid"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="alumniModal">
+  <div class="modal-box">
+    <button class="modal-close" id="alumniModalClose" aria-label="Close">&times;</button>
+    <img class="modal-photo" id="alumniModalPhoto" src="" alt="">
+    <div class="modal-role" id="alumniModalRole"></div>
+    <h3 id="alumniModalName"></h3>
+    <p id="alumniModalBio"></p>
   </div>
 </div>
 
@@ -68,5 +85,72 @@
 
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
+<script>
+  let ALUMNI_DATA = [];
+  let currentCategory = 'Pro';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    ALUMNI_DATA = await fetchSheet(SITE_CONFIG.sheets.alumni, 'data/sample-alumni.csv');
+
+    document.querySelectorAll('.team-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.team-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentCategory = tab.dataset.category;
+        renderAlumni();
+      });
+    });
+
+    document.getElementById('alumniModalClose').addEventListener('click', closeAlumniModal);
+    document.getElementById('alumniModal').addEventListener('click', (e) => {
+      if (e.target.id === 'alumniModal') closeAlumniModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAlumniModal();
+    });
+
+    renderAlumni();
+  });
+
+  function renderAlumni() {
+    const grid = document.getElementById('alumniGrid');
+    const players = ALUMNI_DATA.filter(p => p.Category === currentCategory);
+
+    if (!players.length) {
+      grid.innerHTML = '<p>No alumni posted yet for this category.</p>';
+      return;
+    }
+
+    grid.innerHTML = players.map((p, i) => `
+      <div class="coach-card">
+        <div class="photo" style="background-image:url('${p.Photo}'); background-size:cover; background-position:center;"></div>
+        <div class="body">
+          <div class="role">${p.Team || ''}${p.Years ? ' · ' + p.Years : ''}</div>
+          <h3>${p.Name || ''}</h3>
+          <button class="btn-bio" data-index="${i}">Read bio →</button>
+        </div>
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('.btn-bio').forEach(btn => {
+      btn.addEventListener('click', () => openAlumniModal(players[btn.dataset.index]));
+    });
+  }
+
+  function openAlumniModal(p) {
+    document.getElementById('alumniModalPhoto').src = p.Photo || '';
+    document.getElementById('alumniModalPhoto').alt = p.Name || '';
+    document.getElementById('alumniModalRole').textContent = `${p.Team || ''}${p.Years ? ' · ' + p.Years : ''}`;
+    document.getElementById('alumniModalName').textContent = p.Name || '';
+    document.getElementById('alumniModalBio').textContent = p.Bio || '';
+    document.getElementById('alumniModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAlumniModal() {
+    document.getElementById('alumniModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
 </body>
 </html>

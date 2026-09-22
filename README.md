@@ -52,15 +52,24 @@ Create one Google Sheet with three tabs, using these exact column headers:
 - The homepage automatically shows whichever row has the most recent date
   — just add a new row for each update, no need to delete old ones
 
+**Alumni tab**
+`Category, Name, Team, Years, Photo, Bio`
+- `Category` must be exactly `Pro`, `Independent`, or `College` — this is
+  what the tab on the Alumni page filters by
+- `Team` is whichever team they play/played for (e.g. a pro affiliate,
+  an indy league team, or a college program)
+- `Years` is any text — e.g. `2019-2023` or just `2021`
+- `Photo` is a direct image link, same rule as the other photo columns
+
 See `data/sample-schedule.csv`, `data/sample-roster.csv`,
-`data/sample-photos.csv`, `data/sample-coaches.csv`, and
-`data/sample-news.csv` in this folder for the exact format — the live site
-falls back to these sample files automatically until the real sheet is
+`data/sample-photos.csv`, `data/sample-coaches.csv`, `data/sample-news.csv`,
+and `data/sample-alumni.csv` in this folder for the exact format — the live
+site falls back to these sample files automatically until the real sheet is
 connected, so the site never looks broken or empty.
 
 ## 2. Publish each tab as CSV
 
-For each of the five tabs:
+For each of the six tabs:
 1. File > Share > Publish to web
 2. Under "Link", choose the specific sheet/tab (not "Entire document")
 3. Choose "Comma-separated values (.csv)" as the format
@@ -68,7 +77,7 @@ For each of the five tabs:
 
 ## 3. Paste the links into the config
 
-Open `js/config.js` and replace the five placeholder values under
+Open `js/config.js` and replace the placeholder values under
 `sheets` with the links from step 2:
 
 ```js
@@ -77,7 +86,8 @@ sheets: {
   roster: "https://docs.google.com/.../pub?output=csv",
   photos: "https://docs.google.com/.../pub?output=csv",
   coaches: "https://docs.google.com/.../pub?output=csv",
-  news: "https://docs.google.com/.../pub?output=csv"
+  news: "https://docs.google.com/.../pub?output=csv",
+  alumni: "https://docs.google.com/.../pub?output=csv"
 }
 ```
 
