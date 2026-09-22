@@ -1,4 +1,4 @@
-Category,Name,Team,Years,Photo,Bio
-Pro,Sample Player,Los Angeles Dodgers (AAA),2018-2022,https://placehold.co/400x400?text=Alumni+Photo,A brief bio about this alumnus's playing career after Hart goes here.
-College,Sample Player,UCLA Bruins,2019-2023,https://placehold.co/400x400?text=Alumni+Photo,A brief bio about this alumnus's college career goes here.
-Independent,Sample Player,Long Island Ducks,2020-2021,https://placehold.co/400x400?text=Alumni+Photo,A brief bio about this alumnus's independent league career goes here.
+Category,Name,Teams,Photo,Bio,ProLink
+Pro,Sample Player,Tampa Bay Rays 2006-2012; New York Yankees 2013-2015,https://placehold.co/350x490?text=Alumni+Photo,A brief bio about this alumnus's playing career after Hart goes here.,https://www.mlb.com
+College,Sample Player,UCLA Bruins 2019-2023,https://placehold.co/350x490?text=Alumni+Photo,A brief bio about this alumnus's college career goes here.,
+Independent,Sample Player,Long Island Ducks 2020-2021,https://placehold.co/350x490?text=Alumni+Photo,A brief bio about this alumnus's independent league career goes here.,https://www.atlanticleague.com
