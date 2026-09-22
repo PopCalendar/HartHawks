@@ -38,27 +38,75 @@
 <div class="page-header">
   <div class="container">
     <h1>Dugout Club</h1>
-    <p>Booster support that keeps equipment, travel, and team needs covered.</p>
+    <p>The booster club behind Hart Hawks Baseball — step into the locker room to learn more.</p>
   </div>
 </div>
 
-<div class="section">
+<div class="locker-room">
   <div class="container">
-    <div class="placeholder-note">Set the real PayPal.me link and Zelle details in js/config.js (SITE_CONFIG.donate). Drop a real Zelle QR code image at assets/zelle-qr-placeholder.png (or update the path).</div>
-
-    <div class="donate-grid">
-      <div class="donate-panel">
-        <h3>Give with PayPal</h3>
-        <p>One-time or recurring, any amount.</p>
-        <a class="btn btn-solid" style="border-color:var(--black); color:var(--paper); background:var(--red); border-color:var(--red);" id="paypalLink" href="#" target="_blank" rel="noopener">Donate on PayPal</a>
-      </div>
-      <div class="donate-panel">
-        <h3>Give with Zelle</h3>
-        <p>Scan to send directly, no fees.</p>
-        <img class="qr" id="zelleQr" src="" alt="Zelle QR code">
-        <p id="zelleHandle" style="font-size:0.9rem; color:var(--muted);"></p>
-      </div>
+    <div class="locker-room-head">
+      <h2>Suit up — pick a locker</h2>
+      <p>Everything about the Dugout Club lives in one of the six lockers below.</p>
     </div>
+
+    <div class="locker-row">
+      <button class="locker" data-section="about">
+        <div class="locker-vent"><span></span><span></span></div>
+        <div class="locker-tag">ABOUT</div>
+        <div class="locker-emblem">H</div>
+        <div class="locker-handle"></div>
+        <div class="locker-bench"></div>
+      </button>
+
+      <button class="locker" data-section="board">
+        <div class="locker-vent"><span></span><span></span></div>
+        <div class="locker-tag">BOARD</div>
+        <div class="locker-emblem">H</div>
+        <div class="locker-handle"></div>
+        <div class="locker-bench"></div>
+      </button>
+
+      <button class="locker" data-section="sponsors">
+        <div class="locker-vent"><span></span><span></span></div>
+        <div class="locker-tag">SPONSORS</div>
+        <div class="locker-emblem">H</div>
+        <div class="locker-handle"></div>
+        <div class="locker-bench"></div>
+      </button>
+
+      <button class="locker" data-section="events">
+        <div class="locker-vent"><span></span><span></span></div>
+        <div class="locker-tag">EVENTS</div>
+        <div class="locker-emblem">H</div>
+        <div class="locker-handle"></div>
+        <div class="locker-bench"></div>
+      </button>
+
+      <button class="locker" data-section="donate">
+        <div class="locker-vent"><span></span><span></span></div>
+        <div class="locker-tag">DONATE</div>
+        <div class="locker-emblem">H</div>
+        <div class="locker-handle"></div>
+        <div class="locker-bench"></div>
+      </button>
+
+      <button class="locker" data-section="bylaws">
+        <div class="locker-vent"><span></span><span></span></div>
+        <div class="locker-tag">BYLAWS</div>
+        <div class="locker-emblem">H</div>
+        <div class="locker-handle"></div>
+        <div class="locker-bench"></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="lockerModal">
+  <div class="modal-box modal-box-wide">
+    <button class="modal-close" id="lockerModalClose" aria-label="Close">&times;</button>
+    <div class="modal-role" id="lockerModalTag"></div>
+    <h3 id="lockerModalTitle"></h3>
+    <div class="locker-modal-body" id="lockerModalBody"></div>
   </div>
 </div>
 
@@ -71,11 +119,106 @@
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
 <script>
+  const LOCKER_CONTENT = {
+    about: {
+      tag: "ABOUT",
+      title: "About the Dugout Club",
+      body: `
+        <div class="placeholder-note">Placeholder text — edit the "about" entry in the LOCKER_CONTENT object near the bottom of dugout-club.html to add your real About copy.</div>
+        <p>The Dugout Club is the parent-run booster organization supporting Hart Hawks Baseball across Varsity, JV, and Freshman. We fund equipment, field maintenance, travel, and everything else that keeps the season running.</p>
+      `
+    },
+    board: {
+      tag: "BOARD",
+      title: "Board Members",
+      body: `
+        <div class="placeholder-note">Placeholder — edit the "board" entry in dugout-club.html with real names and roles.</div>
+        <p><strong>President:</strong> Name</p>
+        <p><strong>Treasurer:</strong> Name</p>
+        <p><strong>Secretary:</strong> Name</p>
+        <p><strong>Fundraising Chair:</strong> Name</p>
+      `
+    },
+    sponsors: {
+      tag: "SPONSORS",
+      title: "Our Sponsors",
+      body: `
+        <div class="placeholder-note">Placeholder — edit the "sponsors" entry in dugout-club.html to list real sponsor names/logos once you have them.</div>
+        <p>Thank you to the local businesses supporting Hart Hawks Baseball this season. Sponsor names and logos go here.</p>
+      `
+    },
+    events: {
+      tag: "EVENTS",
+      title: "Upcoming Events",
+      body: `
+        <div class="placeholder-note">Placeholder — edit the "events" entry in dugout-club.html, or ask to have this pull from a spreadsheet tab like the other pages if it'll update often.</div>
+        <p>Fundraisers, spirit nights, and volunteer sign-ups will be listed here.</p>
+      `
+    },
+    donate: {
+      tag: "DONATE",
+      title: "Support the Team",
+      body: `
+        <p>Every donation goes straight to equipment, travel, and team needs.</p>
+        <div class="donate-grid-modal">
+          <div class="donate-panel">
+            <h3>Give with PayPal</h3>
+            <p>One-time or recurring, any amount.</p>
+            <a class="btn btn-solid" style="border-color:var(--red); color:var(--paper); background:var(--red);" id="modalPaypalLink" href="#" target="_blank" rel="noopener">Donate on PayPal</a>
+          </div>
+          <div class="donate-panel">
+            <h3>Give with Zelle</h3>
+            <p>Scan to send directly, no fees.</p>
+            <img class="qr" id="modalZelleQr" src="" alt="Zelle QR code">
+            <p id="modalZelleHandle" style="font-size:0.9rem; color:var(--muted);"></p>
+          </div>
+        </div>
+      `
+    },
+    bylaws: {
+      tag: "BYLAWS",
+      title: "Bylaws",
+      body: `
+        <div class="placeholder-note">Placeholder — edit the "bylaws" entry in dugout-club.html. If your bylaws are a PDF, upload it to the repo and link to it here instead.</div>
+        <p>The Dugout Club's governing bylaws will be posted here.</p>
+      `
+    }
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('paypalLink').href = SITE_CONFIG.donate.paypalUrl;
-    document.getElementById('zelleQr').src = SITE_CONFIG.donate.zelleQrImage;
-    document.getElementById('zelleHandle').textContent = SITE_CONFIG.donate.zelleHandle;
+    document.querySelectorAll('.locker').forEach(locker => {
+      locker.addEventListener('click', () => openLocker(locker.dataset.section));
+    });
+    document.getElementById('lockerModalClose').addEventListener('click', closeLocker);
+    document.getElementById('lockerModal').addEventListener('click', (e) => {
+      if (e.target.id === 'lockerModal') closeLocker();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLocker();
+    });
   });
+
+  function openLocker(key) {
+    const data = LOCKER_CONTENT[key];
+    if (!data) return;
+    document.getElementById('lockerModalTag').textContent = data.tag;
+    document.getElementById('lockerModalTitle').textContent = data.title;
+    document.getElementById('lockerModalBody').innerHTML = data.body;
+
+    if (key === 'donate') {
+      document.getElementById('modalPaypalLink').href = SITE_CONFIG.donate.paypalUrl;
+      document.getElementById('modalZelleQr').src = SITE_CONFIG.donate.zelleQrImage;
+      document.getElementById('modalZelleHandle').textContent = SITE_CONFIG.donate.zelleHandle;
+    }
+
+    document.getElementById('lockerModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLocker() {
+    document.getElementById('lockerModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
 </script>
 </body>
 </html>
