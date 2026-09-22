@@ -53,13 +53,17 @@ Create one Google Sheet with three tabs, using these exact column headers:
   — just add a new row for each update, no need to delete old ones
 
 **Alumni tab**
-`Category, Name, Team, Years, Photo, Bio`
+`Category, Name, Teams, Photo, Bio, ProLink`
 - `Category` must be exactly `Pro`, `Independent`, or `College` — this is
   what the tab on the Alumni page filters by
-- `Team` is whichever team they play/played for (e.g. a pro affiliate,
-  an indy league team, or a college program)
-- `Years` is any text — e.g. `2019-2023` or just `2021`
-- `Photo` is a direct image link, same rule as the other photo columns
+- `Teams` holds every team they played for, in one cell, separated by
+  semicolons — e.g. `Tampa Bay Rays 2006-2012; New York Yankees 2013-2015`.
+  Each one shows on its own line on the site automatically.
+- `Photo` is a direct image link, same rule as the other photo columns.
+  Photos display at a standard baseball-card ratio (2.5" × 3.5"), so a
+  portrait-oriented photo looks best.
+- `ProLink` is optional — a link to the player's pro team/league page.
+  Leave blank to hide the button.
 
 See `data/sample-schedule.csv`, `data/sample-roster.csv`,
 `data/sample-photos.csv`, `data/sample-coaches.csv`, `data/sample-news.csv`,

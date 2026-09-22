@@ -55,7 +55,7 @@
 
 <div class="section">
   <div class="container">
-    <div class="placeholder-note">Alumni pull from the Alumni tab of the spreadsheet (SITE_CONFIG.sheets.alumni in js/config.js). Each row needs Category (Pro, Independent, or College), Name, Team, Years, a Photo link, and a Bio.</div>
+    <div class="placeholder-note">Alumni pull from the Alumni tab of the spreadsheet (SITE_CONFIG.sheets.alumni in js/config.js). Each row needs Category (Pro, Independent, or College), Name, Teams (e.g. "Tampa Bay Rays 2006-2012; New York Yankees 2013-2015" — separate multiple teams with a semicolon), a Photo link, a Bio, and an optional ProLink URL.</div>
 
     <div class="team-tabs">
       <button class="team-tab active" data-category="Pro">Pro</button>
@@ -70,10 +70,11 @@
 <div class="modal-overlay" id="alumniModal">
   <div class="modal-box">
     <button class="modal-close" id="alumniModalClose" aria-label="Close">&times;</button>
-    <img class="modal-photo" id="alumniModalPhoto" src="" alt="">
-    <div class="modal-role" id="alumniModalRole"></div>
-    <h3 id="alumniModalName"></h3>
+    <img class="modal-photo-card" id="alumniModalPhoto" src="" alt="">
+    <h3 id="alumniModalName" style="text-align:center;"></h3>
+    <div class="modal-teams" id="alumniModalTeams" style="text-align:center;"></div>
     <p id="alumniModalBio"></p>
+    <p id="alumniModalLinkWrap" style="text-align:center; margin-top:18px;"></p>
   </div>
 </div>
 
@@ -121,28 +122,46 @@
       return;
     }
 
-    grid.innerHTML = players.map((p, i) => `
-      <div class="coach-card">
-        <div class="photo" style="background-image:url('${p.Photo}'); background-size:cover; background-position:center;"></div>
-        <div class="body">
-          <div class="role">${p.Team || ''}${p.Years ? ' · ' + p.Years : ''}</div>
-          <h3>${p.Name || ''}</h3>
-          <button class="btn-bio" data-index="${i}">Read bio →</button>
+    grid.innerHTML = players.map((p, i) => {
+      const teamLines = splitTeams(p.Teams);
+      return `
+        <div class="coach-card player-card">
+          <div class="photo" style="background-image:url('${p.Photo}'); background-size:cover; background-position:center;"></div>
+          <div class="body">
+            <h3 style="margin-bottom:2px;">${p.Name || ''}</h3>
+            <div class="teams">
+              ${teamLines.map(t => `<div class="team-line">${t}</div>`).join('')}
+            </div>
+            <button class="btn-bio" data-index="${i}">Read bio →</button>
+          </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     grid.querySelectorAll('.btn-bio').forEach(btn => {
       btn.addEventListener('click', () => openAlumniModal(players[btn.dataset.index]));
     });
   }
 
+  function splitTeams(teamsField) {
+    if (!teamsField) return [];
+    return teamsField.split(';').map(t => t.trim()).filter(Boolean);
+  }
+
   function openAlumniModal(p) {
     document.getElementById('alumniModalPhoto').src = p.Photo || '';
     document.getElementById('alumniModalPhoto').alt = p.Name || '';
-    document.getElementById('alumniModalRole').textContent = `${p.Team || ''}${p.Years ? ' · ' + p.Years : ''}`;
     document.getElementById('alumniModalName').textContent = p.Name || '';
+    document.getElementById('alumniModalTeams').innerHTML = splitTeams(p.Teams).map(t => `<div class="team-line">${t}</div>`).join('');
     document.getElementById('alumniModalBio').textContent = p.Bio || '';
+
+    const linkWrap = document.getElementById('alumniModalLinkWrap');
+    if (p.ProLink && p.ProLink.trim()) {
+      linkWrap.innerHTML = `<a class="btn btn-solid" style="border-color:var(--red); color:var(--paper); background:var(--red);" href="${p.ProLink}" target="_blank" rel="noopener">Visit Pro Site →</a>`;
+    } else {
+      linkWrap.innerHTML = '';
+    }
+
     document.getElementById('alumniModal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
