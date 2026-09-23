@@ -517,6 +517,13 @@ table.roster td.jersey {
   line-height: 1.4;
 }
 
+.grad-year {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
 .modal-photo-card {
   width: 240px;
   aspect-ratio: 2.5 / 3.5;

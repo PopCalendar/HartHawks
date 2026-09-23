@@ -58,7 +58,6 @@
 
     <div class="team-tabs">
       <button class="team-tab active" data-category="Pro">Pro</button>
-      <button class="team-tab" data-category="Independent">Independent</button>
       <button class="team-tab" data-category="College">College</button>
     </div>
 
@@ -71,6 +70,7 @@
     <button class="modal-close" id="alumniModalClose" aria-label="Close">&times;</button>
     <img class="modal-photo-card" id="alumniModalPhoto" src="" alt="">
     <h3 id="alumniModalName" style="text-align:center;"></h3>
+    <div id="alumniModalGrad" class="grad-year" style="text-align:center;"></div>
     <div class="modal-teams" id="alumniModalTeams" style="text-align:center;"></div>
     <p id="alumniModalBio"></p>
     <p id="alumniModalLinkWrap" style="text-align:center; margin-top:18px;"></p>
@@ -128,6 +128,7 @@
           <div class="photo" style="background-image:url('${p.Photo}'); background-size:cover; background-position:center;"></div>
           <div class="body">
             <h3 style="margin-bottom:2px;">${p.Name || ''}</h3>
+            ${p.GradYear ? `<div class="grad-year">Hart Graduate: ${p.GradYear}</div>` : ''}
             <div class="teams">
               ${teamLines.map(t => `<div class="team-line">${t}</div>`).join('')}
             </div>
@@ -151,6 +152,8 @@
     document.getElementById('alumniModalPhoto').src = p.Photo || '';
     document.getElementById('alumniModalPhoto').alt = p.Name || '';
     document.getElementById('alumniModalName').textContent = p.Name || '';
+    const gradEl = document.getElementById('alumniModalGrad');
+    gradEl.textContent = p.GradYear ? `Hart Graduate: ${p.GradYear}` : '';
     document.getElementById('alumniModalTeams').innerHTML = splitTeams(p.Teams).map(t => `<div class="team-line">${t}</div>`).join('');
     document.getElementById('alumniModalBio').textContent = p.Bio || '';
 

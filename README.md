@@ -53,9 +53,11 @@ Create one Google Sheet with three tabs, using these exact column headers:
   — just add a new row for each update, no need to delete old ones
 
 **Alumni tab**
-`Category, Name, Teams, Photo, Bio, ProLink`
-- `Category` must be exactly `Pro`, `Independent`, or `College` — this is
-  what the tab on the Alumni page filters by
+`Category, Name, GradYear, Teams, Photo, Bio, ProLink`
+- `Category` must be exactly `Pro` or `College` — this is what the tab on
+  the Alumni page filters by
+- `GradYear` is the year they graduated Hart — shows as "Hart Graduate:
+  (year)" under their name on the site
 - `Teams` holds every team they played for, in one cell, separated by
   semicolons — e.g. `Tampa Bay Rays 2006-2012; New York Yankees 2013-2015`.
   Each one shows on its own line on the site automatically.
