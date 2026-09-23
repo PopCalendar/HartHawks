@@ -67,7 +67,11 @@ Create one Google Sheet with three tabs, using these exact column headers:
   `Tampa Bay Rays 2006-2012; New York Yankees 2013-2015` (each shows on
   its own line). For College, just put the college name, e.g. `UCLA Bruins`.
 - `Photo` is a direct image link, same rule as the other photo columns.
-  Photos display at a standard baseball-card ratio (2.5" × 3.5").
+  For **Pro** rows, photos display at a standard baseball-card ratio
+  (2.5" × 3.5" portrait) — a portrait player photo looks best. For
+  **College** rows, the photo box is wide (3:1) and shows the whole
+  image without cropping — built for a horizontal college logo rather
+  than a portrait photo.
 - `ProLink` is optional (Pro rows only) — a link to the player's pro
   team/league page. Leave blank to hide the button.
 

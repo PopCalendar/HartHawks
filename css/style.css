@@ -531,7 +531,7 @@ table.roster td.jersey {
 
 .alumni-list-row {
   display: grid;
-  grid-template-columns: 56px 1.4fr 1fr 1.4fr;
+  grid-template-columns: 130px 1.4fr 1fr 1.4fr;
   align-items: center;
   gap: 16px;
   padding: 10px 16px;
@@ -555,11 +555,13 @@ table.roster td.jersey {
 }
 
 .alumni-list-photo {
-  width: 46px;
-  aspect-ratio: 2.5 / 3.5;
-  background-size: cover;
+  width: 110px;
+  aspect-ratio: 3 / 1;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
-  background-color: #e7e3da;
+  background-color: #fff;
+  border: 1px solid var(--line);
 }
 
 .alumni-list-name { font-weight: 600; }
@@ -568,13 +570,13 @@ table.roster td.jersey {
 
 @media (max-width: 640px) {
   .alumni-list-row {
-    grid-template-columns: 44px 1fr;
+    grid-template-columns: 100px 1fr;
     grid-template-areas:
       "photo name"
       "photo grad"
       "photo college";
   }
-  .alumni-list-photo { grid-area: photo; }
+  .alumni-list-photo { grid-area: photo; width: 90px; }
   .alumni-list-name { grid-area: name; }
   .alumni-list-grad { grid-area: grad; }
   .alumni-list-college { grid-area: college; }
