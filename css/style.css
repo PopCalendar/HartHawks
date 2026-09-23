@@ -533,9 +533,15 @@ table.roster td.jersey {
   margin-bottom: 22px;
 }
 
-.link-preview-card h3 { margin-bottom: 12px; }
+.link-preview-card h3 { margin-bottom: 4px; }
 .link-preview-card h3 a { color: var(--black); text-decoration: none; }
 .link-preview-card h3 a:hover { color: var(--red); }
+
+.link-preview-date {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin: 0 0 12px;
+}
 
 .link-preview-body {
   display: flex;

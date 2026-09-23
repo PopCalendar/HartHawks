@@ -67,9 +67,13 @@ function renderLinkPreviewCards(container, rows, emptyMessage) {
     return db - da;
   });
 
-  container.innerHTML = sorted.map(r => `
+  container.innerHTML = sorted.map(r => {
+    const d = new Date(r.Date + 'T00:00:00');
+    const dateLabel = isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    return `
     <article class="link-preview-card">
       <h3><a href="${r.URL || '#'}" target="_blank" rel="noopener">${r.Title || ''}</a></h3>
+      ${dateLabel ? `<p class="link-preview-date">${dateLabel}</p>` : ''}
       <div class="link-preview-body">
         ${r.ImageURL ? `<img class="link-preview-thumb" src="${r.ImageURL}" alt="${r.Title || ''}">` : ''}
         <p class="link-preview-excerpt">${r.Excerpt || ''} ${r.URL ? `<a href="${r.URL}" target="_blank" rel="noopener">Continue reading</a>` : ''}</p>
@@ -79,7 +83,8 @@ function renderLinkPreviewCards(container, rows, emptyMessage) {
         <span>${r.Source || ''}</span>
       </div>
     </article>
-  `).join('');
+  `;
+  }).join('');
 }
 
 /**
