@@ -121,6 +121,16 @@
       return;
     }
 
+    if (currentCategory === 'College') {
+      renderCollegeList(players);
+    } else {
+      renderProGrid(players);
+    }
+  }
+
+  function renderProGrid(players) {
+    const grid = document.getElementById('alumniGrid');
+    grid.className = 'card-grid';
     grid.innerHTML = players.map((p, i) => {
       const teamLines = splitTeams(p.Teams);
       return `
@@ -141,6 +151,27 @@
     grid.querySelectorAll('.btn-bio').forEach(btn => {
       btn.addEventListener('click', () => openAlumniModal(players[btn.dataset.index]));
     });
+  }
+
+  function renderCollegeList(players) {
+    const grid = document.getElementById('alumniGrid');
+    grid.className = 'alumni-list';
+    const header = `
+      <div class="alumni-list-row alumni-list-header">
+        <div></div>
+        <div>Name</div>
+        <div>Grad Year</div>
+        <div>College</div>
+      </div>
+    `;
+    grid.innerHTML = header + players.map(p => `
+      <div class="alumni-list-row">
+        <div class="alumni-list-photo" style="background-image:url('${p.Photo}');"></div>
+        <div class="alumni-list-name">${p.Name || ''}</div>
+        <div class="alumni-list-grad">${p.GradYear || ''}</div>
+        <div class="alumni-list-college">${p.Teams || ''}</div>
+      </div>
+    `).join('');
   }
 
   function splitTeams(teamsField) {

@@ -54,18 +54,22 @@ Create one Google Sheet with three tabs, using these exact column headers:
 
 **Alumni tab**
 `Category, Name, GradYear, Teams, Photo, Bio, ProLink`
-- `Category` must be exactly `Pro` or `College` — this is what the tab on
-  the Alumni page filters by
-- `GradYear` is the year they graduated Hart — shows as "Hart Graduate:
-  (year)" under their name on the site
-- `Teams` holds every team they played for, in one cell, separated by
-  semicolons — e.g. `Tampa Bay Rays 2006-2012; New York Yankees 2013-2015`.
-  Each one shows on its own line on the site automatically.
+- `Category` must be exactly `Pro` or `College` — this controls both the
+  tab filter and the display style:
+  - **Pro** rows show as photo cards with a "Read bio" popup, same as
+    Coaches
+  - **College** rows show as a plain list (photo, name, grad year,
+    college) with no bio popup — `Bio` and `ProLink` are ignored for
+    College rows, so they can be left blank
+- `GradYear` is the year they graduated Hart
+- `Teams` — for Pro, holds every team they played for in one cell,
+  separated by semicolons, e.g.
+  `Tampa Bay Rays 2006-2012; New York Yankees 2013-2015` (each shows on
+  its own line). For College, just put the college name, e.g. `UCLA Bruins`.
 - `Photo` is a direct image link, same rule as the other photo columns.
-  Photos display at a standard baseball-card ratio (2.5" × 3.5"), so a
-  portrait-oriented photo looks best.
-- `ProLink` is optional — a link to the player's pro team/league page.
-  Leave blank to hide the button.
+  Photos display at a standard baseball-card ratio (2.5" × 3.5").
+- `ProLink` is optional (Pro rows only) — a link to the player's pro
+  team/league page. Leave blank to hide the button.
 
 See `data/sample-schedule.csv`, `data/sample-roster.csv`,
 `data/sample-photos.csv`, `data/sample-coaches.csv`, `data/sample-news.csv`,

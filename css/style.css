@@ -524,6 +524,62 @@ table.roster td.jersey {
   margin-bottom: 6px;
 }
 
+.alumni-list {
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.alumni-list-row {
+  display: grid;
+  grid-template-columns: 56px 1.4fr 1fr 1.4fr;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.alumni-list-row:last-child { border-bottom: none; }
+
+.alumni-list-header {
+  background: var(--black);
+  color: var(--paper);
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+}
+.alumni-list-header > div:first-child { visibility: hidden; }
+
+@media (max-width: 640px) {
+  .alumni-list-header { display: none; }
+}
+
+.alumni-list-photo {
+  width: 46px;
+  aspect-ratio: 2.5 / 3.5;
+  background-size: cover;
+  background-position: center;
+  background-color: #e7e3da;
+}
+
+.alumni-list-name { font-weight: 600; }
+.alumni-list-grad { color: var(--red); font-size: 0.85rem; font-weight: 600; }
+.alumni-list-college { color: var(--muted); font-size: 0.92rem; }
+
+@media (max-width: 640px) {
+  .alumni-list-row {
+    grid-template-columns: 44px 1fr;
+    grid-template-areas:
+      "photo name"
+      "photo grad"
+      "photo college";
+  }
+  .alumni-list-photo { grid-area: photo; }
+  .alumni-list-name { grid-area: name; }
+  .alumni-list-grad { grid-area: grad; }
+  .alumni-list-college { grid-area: college; }
+}
+
 .modal-photo-card {
   width: 240px;
   aspect-ratio: 2.5 / 3.5;
