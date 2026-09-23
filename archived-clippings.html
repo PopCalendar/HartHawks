@@ -55,6 +55,7 @@
 
 <div class="section">
   <div class="container">
+    <div class="year-tabs" id="yearTabs"></div>
     <div id="clippingsCards"></div>
   </div>
 </div>
@@ -68,10 +69,37 @@
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
 <script>
+  const CLIPPING_YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018];
+  let ALL_CLIPPINGS = [];
+  let currentYear = CLIPPING_YEARS[0];
+
   document.addEventListener('DOMContentLoaded', async () => {
-    const rows = await fetchSheet(SITE_CONFIG.sheets.archivedClippings, 'data/sample-archived-clippings.csv');
-    renderLinkPreviewCards(document.getElementById('clippingsCards'), rows, 'No archived clippings posted yet.');
+    ALL_CLIPPINGS = await fetchSheet(SITE_CONFIG.sheets.archivedClippings, 'data/sample-archived-clippings.csv');
+
+    const tabsEl = document.getElementById('yearTabs');
+    tabsEl.innerHTML = CLIPPING_YEARS.map(y =>
+      `<button class="team-tab${y === currentYear ? ' active' : ''}" data-year="${y}">${y}</button>`
+    ).join('');
+
+    tabsEl.querySelectorAll('.team-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabsEl.querySelectorAll('.team-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentYear = Number(tab.dataset.year);
+        renderYear();
+      });
+    });
+
+    renderYear();
   });
+
+  function renderYear() {
+    const filtered = ALL_CLIPPINGS.filter(r => {
+      const d = new Date(r.Date);
+      return !isNaN(d) && d.getFullYear() === currentYear;
+    });
+    renderLinkPreviewCards(document.getElementById('clippingsCards'), filtered, `No clippings posted yet for ${currentYear}.`);
+  }
 </script>
 </body>
 </html>

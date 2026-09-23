@@ -304,6 +304,14 @@ nav.primary-nav a.active {
   margin-bottom: 24px;
 }
 
+.year-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 4px;
+  border-bottom: 2px solid var(--line);
+  margin-bottom: 24px;
+}
+
 .team-tab {
   background: none;
   border: none;
