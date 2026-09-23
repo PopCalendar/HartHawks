@@ -17,7 +17,9 @@ const SITE_CONFIG = {
     photos: "PLACEHOLDER_PHOTOS_CSV_URL",
     coaches: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=356609670&single=true&output=csv",
     news: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1332022983&single=true&output=csv",
-    alumni: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1513896004&single=true&output=csv"
+    alumni: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1513896004&single=true&output=csv",
+    pressRoom: "PLACEHOLDER_PRESS_ROOM_CSV_URL",
+    archivedClippings: "PLACEHOLDER_ARCHIVED_CLIPPINGS_CSV_URL"
   },
 
   // External stats provider — link to the team's MaxPreps or GameChanger page.

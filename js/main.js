@@ -50,6 +50,39 @@ function splitCSVLine(line) {
 }
 
 /**
+ * Renders a list of link-preview cards (title, thumbnail + excerpt,
+ * source logo/name, "Continue reading" link) into a container element.
+ * Used by Press Room and Archived Clippings, sorted newest first when a
+ * Date column is present.
+ */
+function renderLinkPreviewCards(container, rows, emptyMessage) {
+  if (!rows.length) {
+    container.innerHTML = `<p>${emptyMessage}</p>`;
+    return;
+  }
+
+  const sorted = rows.slice().sort((a, b) => {
+    const da = new Date(a.Date), db = new Date(b.Date);
+    if (isNaN(da) || isNaN(db)) return 0;
+    return db - da;
+  });
+
+  container.innerHTML = sorted.map(r => `
+    <article class="link-preview-card">
+      <h3><a href="${r.URL || '#'}" target="_blank" rel="noopener">${r.Title || ''}</a></h3>
+      <div class="link-preview-body">
+        ${r.ImageURL ? `<img class="link-preview-thumb" src="${r.ImageURL}" alt="${r.Title || ''}">` : ''}
+        <p class="link-preview-excerpt">${r.Excerpt || ''} ${r.URL ? `<a href="${r.URL}" target="_blank" rel="noopener">Continue reading</a>` : ''}</p>
+      </div>
+      <div class="link-preview-source">
+        ${r.SourceLogo ? `<img src="${r.SourceLogo}" alt="">` : ''}
+        <span>${r.Source || ''}</span>
+      </div>
+    </article>
+  `).join('');
+}
+
+/**
  * List every image file inside a folder in the site's GitHub repo, using
  * GitHub's public contents API. Returns an array of direct image URLs,
  * sorted by file name. Returns an empty array if the folder doesn't exist

@@ -75,6 +75,19 @@ Create one Google Sheet with three tabs, using these exact column headers:
 - `ProLink` is optional (Pro rows only) — a link to the player's pro
   team/league page. Leave blank to hide the button.
 
+**Press Room tab** and **Archived Clippings tab** (same format for both)
+`Title, Excerpt, ImageURL, Source, SourceLogo, URL, Date`
+- `Title` is the article headline, shown as a clickable link
+- `Excerpt` is a short snippet/summary — ends with a "Continue reading"
+  link to `URL`
+- `ImageURL` is a direct link to a thumbnail image for the article
+- `Source` is the publication name (e.g. "Santa Clarita Valley Signal")
+- `SourceLogo` is optional — a small icon next to the source name
+- `URL` is the link to the actual article — both the title and
+  "Continue reading" point here
+- `Date` in `YYYY-MM-DD` format — used to sort newest first (optional;
+  if left blank, rows just show in sheet order)
+
 See `data/sample-schedule.csv`, `data/sample-roster.csv`,
 `data/sample-photos.csv`, `data/sample-coaches.csv`, `data/sample-news.csv`,
 and `data/sample-alumni.csv` in this folder for the exact format — the live

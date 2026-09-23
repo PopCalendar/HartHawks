@@ -55,7 +55,7 @@
 
 <div class="section">
   <div class="container">
-    <p>Links to news coverage, media appearances, and press mentions will be listed here.</p>
+    <div id="pressRoomCards"></div>
   </div>
 </div>
 
@@ -67,5 +67,11 @@
 
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const rows = await fetchSheet(SITE_CONFIG.sheets.pressRoom, 'data/sample-press-room.csv');
+    renderLinkPreviewCards(document.getElementById('pressRoomCards'), rows, 'No press coverage posted yet.');
+  });
+</script>
 </body>
 </html>

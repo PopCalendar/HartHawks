@@ -55,7 +55,7 @@
 
 <div class="section">
   <div class="container">
-    <p>Scanned or photographed newspaper clippings will be posted here, likely as a photo album similar to the Photo Gallery.</p>
+    <div id="clippingsCards"></div>
   </div>
 </div>
 
@@ -67,5 +67,11 @@
 
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const rows = await fetchSheet(SITE_CONFIG.sheets.archivedClippings, 'data/sample-archived-clippings.csv');
+    renderLinkPreviewCards(document.getElementById('clippingsCards'), rows, 'No archived clippings posted yet.');
+  });
+</script>
 </body>
 </html>
