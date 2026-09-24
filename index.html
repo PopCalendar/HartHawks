@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .diamond-section {
+    position: relative;
+    background:
+      linear-gradient(rgba(8,8,8,0.72), rgba(8,8,8,0.82)),
+      url('assets/diamond-section-bg.jpg') center/cover no-repeat fixed;
+  }
+  .diamond-section h2,
+  .diamond-section h3 { color: #fff; }
+  .diamond-section .tag { color: #d9d4c9; }
+  .diamond-section .section-head { border-bottom-color: rgba(255,255,255,0.35); }
+  .diamond-section p,
+  .diamond-section #latestNews p { color: #ece8df; }
+  .diamond-section a { color: #ffd9de; }
+  @media (max-width: 900px) {
+    .diamond-section { background-attachment: scroll; }
+  }
+</style>
 </head>
 <body>
 
@@ -76,10 +94,10 @@
   </a>
 </div>
 
-<section class="section">
+<section class="section diamond-section">
   <div class="container">
     <div class="section-head">
-      <h2>Latest from the diamond</h2>
+      <h2>Latest from the Diamond</h2>
       <span class="tag">HART PRIDE</span>
     </div>
     <div id="latestNews"></div>
