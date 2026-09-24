@@ -196,7 +196,7 @@ nav.primary-nav a.active {
 
 .hero-mascot {
   position: absolute;
-  right: 4%;
+  left: 56%;
   top: 50%;
   transform: translateY(-50%);
   width: 300px;
