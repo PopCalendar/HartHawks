@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Schedule — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .schedule-hero-wrap {
+    background:
+      linear-gradient(rgba(8,8,8,0.62), rgba(8,8,8,0.78)),
+      url('assets/schedule-background.jpg') center/cover no-repeat fixed;
+  }
+  .schedule-hero-wrap .page-header { background: transparent; }
+  .schedule-hero-wrap .section { background: transparent; padding: 56px 0 72px; }
+  @media (max-width: 900px) {
+    .schedule-hero-wrap { background-attachment: scroll; }
+  }
+</style>
 </head>
 <body>
 
@@ -45,40 +57,42 @@
   </div>
 </header>
 
-<div class="page-header">
-  <div class="container">
-    <h1>Schedule</h1>
-    <p>Every game, by team level. Tap a month to browse, or scroll the list below.</p>
+<div class="schedule-hero-wrap">
+  <div class="page-header">
+    <div class="container">
+      <h1>Schedule</h1>
+      <p>Every game, by team level. Tap a month to browse, or scroll the list below.</p>
+    </div>
   </div>
-</div>
 
-<div class="section">
-  <div class="container">
+  <div class="section">
+    <div class="container">
 
-    <div class="team-tabs">
-      <button class="team-tab active" data-team="Varsity">Varsity</button>
-      <button class="team-tab" data-team="JV">JV</button>
-      <button class="team-tab" data-team="Freshman">Freshman</button>
-    </div>
-
-    <div class="schedule-toolbar">
-      <div class="month-label">Month Year</div>
-      <div class="month-nav">
-        <button id="prevMonth">← Prev</button>
-        <button id="nextMonth">Next →</button>
+      <div class="team-tabs">
+        <button class="team-tab active" data-team="Varsity">Varsity</button>
+        <button class="team-tab" data-team="JV">JV</button>
+        <button class="team-tab" data-team="Freshman">Freshman</button>
       </div>
-    </div>
 
-    <div class="calendar-grid" id="calendarGrid"></div>
-
-    <div class="schedule-list">
-      <div class="section-head">
-        <h2>Full season list</h2>
-        <span class="tag">ALL GAMES</span>
+      <div class="schedule-toolbar">
+        <div class="month-label">Month Year</div>
+        <div class="month-nav">
+          <button id="prevMonth">← Prev</button>
+          <button id="nextMonth">Next →</button>
+        </div>
       </div>
-      <div id="scheduleList"></div>
-    </div>
 
+      <div class="calendar-grid" id="calendarGrid"></div>
+
+      <div class="schedule-list">
+        <div class="section-head">
+          <h2>Full season list</h2>
+          <span class="tag">ALL GAMES</span>
+        </div>
+        <div id="scheduleList"></div>
+      </div>
+
+    </div>
   </div>
 </div>
 
