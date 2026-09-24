@@ -44,14 +44,6 @@ Create one Google Sheet with three tabs, using these exact column headers:
   tied to one team level
 - `Photo` is a direct image link, same rule as the Photos tab above
 
-**News tab**
-`Date, Headline, Body, Photo`
-- `Date` in `YYYY-MM-DD` format
-- `Photo` is optional — a direct image link, same rule as the Photos tab.
-  Leave it blank for a text-only update.
-- The homepage automatically shows whichever row has the most recent date
-  — just add a new row for each update, no need to delete old ones
-
 **Alumni tab**
 `Category, Name, GradYear, Teams, Photo, Bio, ProLink`
 - `Category` must be exactly `Pro` or `College` — this controls both the
@@ -75,28 +67,40 @@ Create one Google Sheet with three tabs, using these exact column headers:
 - `ProLink` is optional (Pro rows only) — a link to the player's pro
   team/league page. Leave blank to hide the button.
 
-**Press Room tab** and **Archived Clippings tab** (same format for both)
-`Title, Excerpt, ImageURL, Source, SourceLogo, URL, Date`
-- `Title` is the article headline, shown as a clickable link
+**Press Room tab**
+`Title, Excerpt, ImageURL, Source, SourceLogo, URL, Date, Featured`
+- `Title` is the headline, shown as a clickable link (or plain text if
+  `URL` is left blank — useful for clippings with no live article to
+  link to)
 - `Excerpt` is a short snippet/summary — ends with a "Continue reading"
-  link to `URL`
+  link to `URL` when one is given
 - `ImageURL` is a direct link to a thumbnail image for the article
 - `Source` is the publication name (e.g. "Santa Clarita Valley Signal")
 - `SourceLogo` is optional — a small icon next to the source name
-- `URL` is the link to the actual article — both the title and
-  "Continue reading" point here
+- `URL` is optional — the link to the actual article. Leave blank for an
+  item with no external link (e.g. a clipping you're only summarizing)
 - `Date` in `YYYY-MM-DD` format — used to sort newest first (optional;
   if left blank, rows just show in sheet order)
+- `Featured` — put `Yes` in this column and that row becomes the "Latest
+  from the diamond" feature on the homepage. The homepage always shows
+  whichever `Featured` row has the most recent `Date`, so you can mark
+  more than one and the newest wins automatically.
+
+**Archived Clippings tab**
+Same columns as Press Room (`Featured` is simply unused here). The
+Archived Clippings page also has year tabs (2018–2026) that filter rows
+by the year in `Date`.
 
 See `data/sample-schedule.csv`, `data/sample-roster.csv`,
-`data/sample-photos.csv`, `data/sample-coaches.csv`, `data/sample-news.csv`,
-and `data/sample-alumni.csv` in this folder for the exact format — the live
-site falls back to these sample files automatically until the real sheet is
-connected, so the site never looks broken or empty.
+`data/sample-photos.csv`, `data/sample-coaches.csv`, `data/sample-alumni.csv`,
+`data/sample-press-room.csv`, and `data/sample-archived-clippings.csv` in
+this folder for the exact format — the live site falls back to these
+sample files automatically until the real sheet is connected, so the site
+never looks broken or empty.
 
 ## 2. Publish each tab as CSV
 
-For each of the six tabs:
+For each of the seven tabs:
 1. File > Share > Publish to web
 2. Under "Link", choose the specific sheet/tab (not "Entire document")
 3. Choose "Comma-separated values (.csv)" as the format
@@ -113,8 +117,9 @@ sheets: {
   roster: "https://docs.google.com/.../pub?output=csv",
   photos: "https://docs.google.com/.../pub?output=csv",
   coaches: "https://docs.google.com/.../pub?output=csv",
-  news: "https://docs.google.com/.../pub?output=csv",
-  alumni: "https://docs.google.com/.../pub?output=csv"
+  alumni: "https://docs.google.com/.../pub?output=csv",
+  pressRoom: "https://docs.google.com/.../pub?output=csv",
+  archivedClippings: "https://docs.google.com/.../pub?output=csv"
 }
 ```
 

@@ -26,7 +26,6 @@
           <a href="#">Hart Pride ▾</a>
           <div class="dropdown">
             <a href="photo-gallery.html">Photo Gallery</a>
-            <a href="news-recaps.html">News &amp; Recaps</a>
             <a href="press-room.html">Press Room</a>
             <a href="alumni.html">Alumni</a>
             <a href="tradition-of-champions.html">Tradition of Champions</a>
@@ -84,7 +83,7 @@
       <span class="tag">HART PRIDE</span>
     </div>
     <div id="latestNews"></div>
-    <p><a href="photo-gallery.html">See Hart Pride →</a></p>
+    <p><a href="press-room.html">See Hart Pride →</a></p>
   </div>
 </section>
 
@@ -117,20 +116,21 @@
       }
     });
 
-    const news = await fetchSheet(SITE_CONFIG.sheets.news, 'data/sample-news.csv');
+    const pressRoom = await fetchSheet(SITE_CONFIG.sheets.pressRoom, 'data/sample-press-room.csv');
+    const featured = pressRoom.filter(r => /^(yes|true|y|x)$/i.test((r.Featured || '').trim()));
     const newsWrap = document.getElementById('latestNews');
-    if (!news.length) {
+    if (!featured.length) {
       newsWrap.innerHTML = '<p>No updates posted yet — check back soon.</p>';
       return;
     }
-    const latest = news.slice().sort((a, b) => new Date(b.Date) - new Date(a.Date))[0];
+    const latest = featured.slice().sort((a, b) => new Date(b.Date) - new Date(a.Date))[0];
     const d = new Date(latest.Date + 'T00:00:00');
     const dateLabel = isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     newsWrap.innerHTML = `
       <p style="color:var(--muted); font-size:0.9rem; margin-bottom:4px;">${dateLabel}</p>
-      <h3 style="margin-bottom:8px;">${latest.Headline || ''}</h3>
-      ${latest.Photo ? `<img src="${latest.Photo}" alt="${latest.Headline || ''}" style="width:100%; max-width:560px; display:block; margin-bottom:14px; border:1px solid var(--line);">` : ''}
-      <p>${latest.Body || ''}</p>
+      <h3 style="margin-bottom:8px;">${latest.Title || ''}</h3>
+      ${latest.ImageURL ? `<img src="${latest.ImageURL}" alt="${latest.Title || ''}" style="width:100%; max-width:560px; display:block; margin-bottom:14px; border:1px solid var(--line);">` : ''}
+      <p>${latest.Excerpt || ''} ${latest.URL ? `<a href="${latest.URL}" target="_blank" rel="noopener">Continue reading</a>` : ''}</p>
     `;
   });
 </script>

@@ -16,7 +16,6 @@ const SITE_CONFIG = {
     roster: "PLACEHOLDER_ROSTER_CSV_URL",
     photos: "PLACEHOLDER_PHOTOS_CSV_URL",
     coaches: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=356609670&single=true&output=csv",
-    news: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1332022983&single=true&output=csv",
     alumni: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1513896004&single=true&output=csv",
     pressRoom: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1295516705&single=true&output=csv",
     archivedClippings: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1213269122&single=true&output=csv"

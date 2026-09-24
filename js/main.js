@@ -72,7 +72,7 @@ function renderLinkPreviewCards(container, rows, emptyMessage) {
     const dateLabel = isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     return `
     <article class="link-preview-card">
-      <h3><a href="${r.URL || '#'}" target="_blank" rel="noopener">${r.Title || ''}</a></h3>
+      <h3>${r.URL ? `<a href="${r.URL}" target="_blank" rel="noopener">${r.Title || ''}</a>` : (r.Title || '')}</h3>
       ${dateLabel ? `<p class="link-preview-date">${dateLabel}</p>` : ''}
       <div class="link-preview-body">
         ${r.ImageURL ? `<img class="link-preview-thumb" src="${r.ImageURL}" alt="${r.Title || ''}">` : ''}
