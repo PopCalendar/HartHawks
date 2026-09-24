@@ -43,10 +43,10 @@ Create one Google Sheet with three tabs, using these exact column headers:
 - `Team` can be `Varsity`, `JV`, `Freshman`, or left blank for a coach not
   tied to one team level
 - `Photo` is a direct image link, same rule as the Photos tab above. The
-  Coaches page displays photos tall and narrow (roughly 2:5, width:height)
-  in a scrolling strip — a portrait or full-body shot works best, with
-  faces kept in the upper two-thirds of the frame since the bottom of
-  each photo is covered by a name/role overlay.
+  Coaches page displays photos at a standard baseball-card ratio
+  (2.5" × 3.5", same as Alumni) in a scrolling strip — a portrait shot
+  works best, with faces kept in the upper two-thirds of the frame
+  since the bottom of each photo is covered by a name/role overlay.
 
 **Alumni tab**
 `Category, Name, GradYear, Teams, Photo, Bio, ProLink`

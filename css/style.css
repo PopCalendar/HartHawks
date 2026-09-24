@@ -539,26 +539,13 @@ table.roster td.jersey {
   overflow: hidden;
 }
 
-.tunnel-intro {
-  padding: 40px 24px 8px;
-  text-align: center;
-}
-.tunnel-intro p {
-  font-family: 'Oswald', sans-serif;
-  color: #6b655c;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  margin: 0;
-}
-
 .tunnel-viewport {
   overflow: hidden;
-  padding: 24px 0 40px;
+  padding: 40px 0;
 }
 
 .tunnel-track {
   display: flex;
-  gap: 2px;
   width: max-content;
   animation: tunnelScroll 34s linear infinite;
 }
@@ -570,8 +557,8 @@ table.roster td.jersey {
 }
 
 .tunnel-panel {
-  width: 260px;
-  height: 660px;
+  width: 300px;
+  height: 420px;
   flex-shrink: 0;
   position: relative;
   background: linear-gradient(160deg, #242020, #141212);
@@ -584,10 +571,16 @@ table.roster td.jersey {
   text-align: left;
 }
 
+.tunnel-divider {
+  width: 9px;
+  flex-shrink: 0;
+  background: linear-gradient(to right, #121212 0 3px, #c8102e 3px 6px, #121212 6px 9px);
+}
+
 .tunnel-scrim {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  padding: 22px 22px 26px;
+  padding: 18px 18px 20px;
   background: linear-gradient(0deg, rgba(0,0,0,0.88), transparent);
   transition: background 0.15s ease;
 }
@@ -598,20 +591,20 @@ table.roster td.jersey {
 .tunnel-scrim .role {
   font-family: 'Oswald', sans-serif;
   color: var(--red);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.05em;
 }
 .tunnel-scrim h3 {
-  margin: 6px 0 0;
+  margin: 5px 0 0;
   font-family: 'Oswald', sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   color: #fff;
   line-height: 1.15;
 }
 
 @media (max-width: 640px) {
-  .tunnel-panel { width: 200px; height: 520px; }
+  .tunnel-panel { width: 214px; height: 300px; }
 }
 
 /* ---- Link-preview cards (Press Room, Archived Clippings) ---- */

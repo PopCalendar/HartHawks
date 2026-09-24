@@ -53,9 +53,6 @@
 </div>
 
 <div class="tunnel-section">
-  <div class="tunnel-intro">
-    <p>TAP A COACH FOR THEIR BIO &middot; HOVER TO PAUSE</p>
-  </div>
   <div class="tunnel-viewport">
     <div class="tunnel-track" id="tunnelTrack"></div>
   </div>
@@ -101,6 +98,7 @@
           <h3>${c.Name || ''}</h3>
         </div>
       </button>
+      <div class="tunnel-divider"></div>
     `).join('');
 
     track.querySelectorAll('.tunnel-panel').forEach(panel => {
