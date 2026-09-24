@@ -5,20 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Coaches — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
-<style>
-  .coaches-hero-wrap .page-header {
-    background: var(--black);
-    border-bottom: 4px solid var(--red);
-  }
-  .coaches-hero-wrap .section {
-    background-image:
-      url('assets/logo.png'),
-      url('assets/pinstripe-tile.png');
-    background-repeat: no-repeat, repeat;
-    background-position: center center, 0 0;
-    background-size: 45% auto, 48px 48px;
-  }
-</style>
 </head>
 <body>
 
@@ -59,19 +45,19 @@
   </div>
 </header>
 
-<div class="coaches-hero-wrap">
-  <div class="page-header">
-    <div class="container">
-      <h1>Coaches</h1>
-      <p>The staff behind all three teams.</p>
-    </div>
+<div class="page-header">
+  <div class="container">
+    <h1>Coaches</h1>
+    <p>The staff behind all three teams.</p>
   </div>
+</div>
 
-  <div class="section">
-    <div class="container">
-
-      <div class="card-grid" id="coachGrid"></div>
-    </div>
+<div class="tunnel-section">
+  <div class="tunnel-intro">
+    <p>TAP A COACH FOR THEIR BIO &middot; HOVER TO PAUSE</p>
+  </div>
+  <div class="tunnel-viewport">
+    <div class="tunnel-track" id="tunnelTrack"></div>
   </div>
 </div>
 
@@ -98,24 +84,27 @@
 
   document.addEventListener('DOMContentLoaded', async () => {
     COACH_DATA = await fetchSheet(SITE_CONFIG.sheets.coaches, 'data/sample-coaches.csv');
-    const grid = document.getElementById('coachGrid');
+    const track = document.getElementById('tunnelTrack');
+
     if (!COACH_DATA.length) {
-      grid.innerHTML = '<p>Coach list not posted yet.</p>';
+      document.querySelector('.tunnel-viewport').innerHTML = '<p style="color:#a49f95; text-align:center;">Coach list not posted yet.</p>';
       return;
     }
-    grid.innerHTML = COACH_DATA.map((c, i) => `
-      <div class="coach-card">
-        <div class="photo" style="background-image:url('${c.Photo}'); background-size:cover; background-position:center;"></div>
-        <div class="body">
+
+    // Double the list so the marquee loop is seamless
+    const loopData = COACH_DATA.concat(COACH_DATA);
+
+    track.innerHTML = loopData.map((c, i) => `
+      <button class="tunnel-panel" data-index="${i % COACH_DATA.length}" style="background-image:url('${c.Photo}');">
+        <div class="tunnel-scrim">
           <div class="role">${c.Team ? c.Team + ' · ' : ''}${c.Role || ''}</div>
           <h3>${c.Name || ''}</h3>
-          <button class="btn-bio" data-index="${i}">Read bio →</button>
         </div>
-      </div>
+      </button>
     `).join('');
 
-    grid.querySelectorAll('.btn-bio').forEach(btn => {
-      btn.addEventListener('click', () => openCoachModal(COACH_DATA[btn.dataset.index]));
+    track.querySelectorAll('.tunnel-panel').forEach(panel => {
+      panel.addEventListener('click', () => openCoachModal(COACH_DATA[panel.dataset.index]));
     });
 
     document.getElementById('modalClose').addEventListener('click', closeCoachModal);

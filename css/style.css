@@ -532,6 +532,88 @@ table.roster td.jersey {
   margin-bottom: 6px;
 }
 
+/* ---- Coaches: Tunnel Wall ---- */
+
+.tunnel-section {
+  background: #0e0e0e;
+  overflow: hidden;
+}
+
+.tunnel-intro {
+  padding: 40px 24px 8px;
+  text-align: center;
+}
+.tunnel-intro p {
+  font-family: 'Oswald', sans-serif;
+  color: #6b655c;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.tunnel-viewport {
+  overflow: hidden;
+  padding: 24px 0 40px;
+}
+
+.tunnel-track {
+  display: flex;
+  gap: 2px;
+  width: max-content;
+  animation: tunnelScroll 34s linear infinite;
+}
+.tunnel-track:hover { animation-play-state: paused; }
+
+@keyframes tunnelScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.tunnel-panel {
+  width: 260px;
+  height: 660px;
+  flex-shrink: 0;
+  position: relative;
+  background: linear-gradient(160deg, #242020, #141212);
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  text-align: left;
+}
+
+.tunnel-scrim {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 22px 22px 26px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.88), transparent);
+  transition: background 0.15s ease;
+}
+.tunnel-panel:hover .tunnel-scrim {
+  background: linear-gradient(0deg, rgba(200,16,46,0.55), transparent);
+}
+
+.tunnel-scrim .role {
+  font-family: 'Oswald', sans-serif;
+  color: var(--red);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.tunnel-scrim h3 {
+  margin: 6px 0 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.35rem;
+  color: #fff;
+  line-height: 1.15;
+}
+
+@media (max-width: 640px) {
+  .tunnel-panel { width: 200px; height: 520px; }
+}
+
 /* ---- Link-preview cards (Press Room, Archived Clippings) ---- */
 
 .link-preview-card {
