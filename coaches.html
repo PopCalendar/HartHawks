@@ -6,11 +6,18 @@
 <title>Coaches — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  .coaches-hero-wrap {
-    background: url('assets/pinstripe-tile.png') repeat;
+  .coaches-hero-wrap .page-header {
+    background: var(--black);
+    border-bottom: 4px solid var(--red);
   }
-  .coaches-hero-wrap .page-header { background: transparent; border-bottom-color: var(--red); }
-  .coaches-hero-wrap .section { background: transparent; }
+  .coaches-hero-wrap .section {
+    background-image:
+      url('assets/logo-watermark.png'),
+      url('assets/pinstripe-tile.png');
+    background-repeat: no-repeat, repeat;
+    background-position: center center, 0 0;
+    background-size: 480px auto, 48px 48px;
+  }
 </style>
 </head>
 <body>
