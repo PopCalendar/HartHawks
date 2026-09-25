@@ -61,7 +61,7 @@
 <div class="modal-overlay" id="coachModal">
   <div class="modal-box">
     <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
-    <img class="modal-photo" id="modalPhoto" src="" alt="">
+    <img class="modal-photo-card" id="modalPhoto" src="" alt="">
     <div class="modal-role" id="modalRole"></div>
     <h3 id="modalName"></h3>
     <p id="modalBio"></p>
@@ -92,12 +92,7 @@
     const loopData = COACH_DATA.concat(COACH_DATA);
 
     track.innerHTML = loopData.map((c, i) => `
-      <button class="tunnel-panel" data-index="${i % COACH_DATA.length}" style="background-image:url('${c.Photo}');">
-        <div class="tunnel-scrim">
-          <div class="role">${c.Team ? c.Team + ' · ' : ''}${c.Role || ''}</div>
-          <h3>${c.Name || ''}</h3>
-        </div>
-      </button>
+      <button class="tunnel-panel" data-index="${i % COACH_DATA.length}" style="background-image:url('${c.Photo}');"></button>
       <div class="tunnel-divider"></div>
     `).join('');
 
