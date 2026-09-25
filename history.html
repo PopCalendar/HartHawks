@@ -5,8 +5,142 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>History — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rye&family=Source+Serif+4:ital,opsz@0,8..60;1,8..60&display=swap');
+
+  .history-page {
+    --gold: #a8823a;
+    --gold-dark: #7c611f;
+    --parchment: #f2ead4;
+    --parchment-dark: #e7dcbd;
+  }
+  .history-page .page-header {
+    background: #121212;
+    border-bottom: 4px solid var(--gold);
+  }
+  .history-page .page-header h1 {
+    font-family: 'Rye', 'Oswald', serif;
+    font-weight: 400;
+    font-size: 2.6rem;
+    letter-spacing: 0.02em;
+  }
+
+  .retro-body {
+    background: var(--parchment);
+    background-image:
+      repeating-linear-gradient(135deg, rgba(0,0,0,0.015) 0 2px, transparent 2px 26px),
+      radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.05), transparent 60%);
+  }
+
+  .retro-heading {
+    font-family: 'Rye', 'Oswald', serif;
+    font-weight: 400;
+    color: #1b1b1b;
+    font-size: 2rem;
+    text-align: center;
+    letter-spacing: 0.01em;
+    margin-bottom: 6px;
+  }
+
+  .retro-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 14px auto 36px;
+  }
+  .retro-divider .line {
+    height: 2px;
+    width: 90px;
+    background: linear-gradient(to right, transparent, var(--gold));
+  }
+  .retro-divider .line.right { background: linear-gradient(to left, transparent, var(--gold)); }
+  .retro-divider .star { color: var(--gold); font-size: 1.1rem; }
+
+  .history-copy {
+    max-width: 720px;
+    margin: 0 auto 64px;
+    font-family: 'Source Serif 4', 'Source Sans 3', serif;
+    font-size: 1.08rem;
+    line-height: 1.85;
+    color: #2a2620;
+  }
+  .history-copy p { margin: 0 0 22px; }
+  .history-copy p:first-of-type::first-letter {
+    font-family: 'Rye', serif;
+    font-size: 3.6rem;
+    float: left;
+    line-height: 0.8;
+    padding: 6px 10px 0 0;
+    color: var(--gold-dark);
+  }
+
+  .wof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 26px;
+    max-width: 1000px;
+    margin: 0 auto 70px;
+  }
+
+  .wof-card {
+    background: #fffdf6;
+    border: 1px solid var(--parchment-dark);
+    box-shadow: 0 2px 0 var(--gold), 0 10px 20px rgba(0,0,0,0.08);
+    padding: 26px 22px 24px;
+    text-align: center;
+  }
+
+  .wof-photo {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 16px;
+    border: 3px solid var(--gold);
+    background: var(--parchment-dark);
+    display: block;
+  }
+
+  .wof-card h3 {
+    font-family: 'Rye', 'Oswald', serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: #1b1b1b;
+    margin: 0 0 4px;
+  }
+
+  .wof-year {
+    font-family: 'Oswald', sans-serif;
+    color: var(--red);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+
+  .wof-card p.achievement {
+    font-size: 0.92rem;
+    color: #4a4536;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .champions-wrap {
+    max-width: 620px;
+    margin: 0 auto 70px;
+    background: #1b1b1b;
+    padding: 16px;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+  }
+  .champions-wrap .inner-frame {
+    border: 2px solid var(--gold);
+    padding: 6px;
+  }
+  .champions-wrap img { display: block; width: 100%; }
+</style>
 </head>
-<body>
+<body class="history-page">
 
 <header class="site-header">
   <div class="container">
@@ -28,7 +162,6 @@
             <a href="photo-gallery.html">Photo Gallery</a>
             <a href="press-room.html">Press Room</a>
             <a href="alumni.html">Alumni</a>
-            <a href="tradition-of-champions.html">Tradition of Champions</a>
             <a href="history.html">History</a>
             <a href="archived-clippings.html">Archived Clippings</a>
           </div>
@@ -47,15 +180,40 @@
 
 <div class="page-header">
   <div class="container">
-    <h1>History</h1>
-    <p>The story of Hart Hawks Baseball over the years.</p>
+    <h1>Our History</h1>
+    <p>The story, the honorees, and the tradition of Hart Hawks Baseball.</p>
   </div>
 </div>
 
-<div class="section">
-  <div class="container">
-    <p>A history of the program — founding, notable eras, past coaches — will go here.</p>
+<div class="retro-body">
+
+  <div class="section">
+    <div class="container">
+      <div class="placeholder-note" style="max-width:720px; margin-left:auto; margin-right:auto;">Placeholder text below — edit the paragraphs directly in history.html with the program's real founding year, eras, and notable milestones.</div>
+
+      <div class="history-copy">
+        <p>Hart Hawks Baseball has been part of William S. Hart High School for generations, built by the players who wore the uniform, the coaches who shaped them, and the families who showed up year after year to fill the stands. [Add the program's founding year and early history here.]</p>
+        <p>Across the decades, the program has produced league champions, CIF contenders, and players who went on to compete at the college and professional level — a tradition documented in full on the Tradition of Champions banner below. [Add notable eras, memorable seasons, or defining moments here.]</p>
+        <p>Today's Hawks carry that same standard forward — Varsity, JV, and Freshman alike — building on what the players before them established, one season at a time.</p>
+      </div>
+
+      <h2 class="retro-heading">Wall of Fame</h2>
+      <div class="retro-divider"><span class="line"></span><span class="star">★</span><span class="line right"></span></div>
+
+      <div class="wof-grid" id="wofGrid"></div>
+
+      <h2 class="retro-heading">Tradition of Champions</h2>
+      <div class="retro-divider"><span class="line"></span><span class="star">★</span><span class="line right"></span></div>
+
+      <div class="champions-wrap">
+        <div class="inner-frame">
+          <img src="assets/tradition-of-champions-banner.jpg" alt="Hart Hawks Baseball Tradition of Champions — 34 league championships, CIF champions 1999, CIF runner-up 1982, 1989, 2015">
+        </div>
+      </div>
+
+    </div>
   </div>
+
 </div>
 
 <footer class="site-footer">
@@ -66,5 +224,24 @@
 
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const inductees = await fetchSheet(SITE_CONFIG.sheets.wallOfFame, 'data/sample-wall-of-fame.csv');
+    const grid = document.getElementById('wofGrid');
+    if (!inductees.length) {
+      grid.innerHTML = '<p style="text-align:center; grid-column:1/-1;">No inductees posted yet.</p>';
+      return;
+    }
+    const sorted = inductees.slice().sort((a, b) => (b.Year || '') - (a.Year || ''));
+    grid.innerHTML = sorted.map(p => `
+      <div class="wof-card">
+        <img class="wof-photo" src="${p.Photo || ''}" alt="${p.Name || ''}">
+        <h3>${p.Name || ''}</h3>
+        <div class="wof-year">CLASS OF ${p.Year || ''}</div>
+        <p class="achievement">${p.Achievement || ''}</p>
+      </div>
+    `).join('');
+  });
+</script>
 </body>
 </html>

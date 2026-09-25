@@ -19,7 +19,8 @@ const SITE_CONFIG = {
     alumni: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1513896004&single=true&output=csv",
     pressRoom: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1295516705&single=true&output=csv",
     archivedClippings: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1213269122&single=true&output=csv",
-    events: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=222442044&single=true&output=csv"
+    events: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=222442044&single=true&output=csv",
+    wallOfFame: "PLACEHOLDER_WALL_OF_FAME_CSV_URL"
   },
 
   // External stats provider — link to the team's MaxPreps or GameChanger page.

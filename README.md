@@ -102,16 +102,24 @@ by the year in `Date`.
 - Shows up in the Dugout Club page's Events locker — add a row for each
   fundraiser, spirit night, or volunteer event
 
+**Wall of Fame tab**
+`Name, Year, Achievement, Photo`
+- Shows up on the History page, sorted newest class first
+- `Year` is whatever year they're being honored/inducted
+- `Photo` is a direct image link, same rule as the other photo columns —
+  displays as a circular photo, so a centered headshot works best
+
 See `data/sample-schedule.csv`, `data/sample-roster.csv`,
 `data/sample-photos.csv`, `data/sample-coaches.csv`, `data/sample-alumni.csv`,
-`data/sample-press-room.csv`, `data/sample-archived-clippings.csv`, and
-`data/sample-events.csv` in this folder for the exact format — the live
-site falls back to these sample files automatically until the real sheet
-is connected, so the site never looks broken or empty.
+`data/sample-press-room.csv`, `data/sample-archived-clippings.csv`,
+`data/sample-events.csv`, and `data/sample-wall-of-fame.csv` in this folder
+for the exact format — the live site falls back to these sample files
+automatically until the real sheet is connected, so the site never looks
+broken or empty.
 
 ## 2. Publish each tab as CSV
 
-For each of the eight tabs:
+For each of the nine tabs:
 1. File > Share > Publish to web
 2. Under "Link", choose the specific sheet/tab (not "Entire document")
 3. Choose "Comma-separated values (.csv)" as the format
@@ -131,7 +139,8 @@ sheets: {
   alumni: "https://docs.google.com/.../pub?output=csv",
   pressRoom: "https://docs.google.com/.../pub?output=csv",
   archivedClippings: "https://docs.google.com/.../pub?output=csv",
-  events: "https://docs.google.com/.../pub?output=csv"
+  events: "https://docs.google.com/.../pub?output=csv",
+  wallOfFame: "https://docs.google.com/.../pub?output=csv"
 }
 ```
 
