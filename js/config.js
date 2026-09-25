@@ -32,7 +32,7 @@ const SITE_CONFIG = {
   donate: {
     paypalUrl: "https://www.paypal.com/donate/?hosted_button_id=7EP5WYB7CZGS2",
     zelleQrImage: "assets/zelle-qr-placeholder.png",
-    zelleHandle: "PLACEHOLDER_ZELLE_EMAIL_OR_PHONE"
+    zelleHandle: "hartdugoutclub@gmail.com"
   },
 
   // Social links — leave blank string to hide an icon
