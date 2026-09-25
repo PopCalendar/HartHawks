@@ -128,10 +128,7 @@
     events: {
       tag: "EVENTS",
       title: "Upcoming Events",
-      body: `
-        <div class="placeholder-note">Placeholder — edit the "events" entry in dugout-club.html, or ask to have this pull from a spreadsheet tab like the other pages if it'll update often.</div>
-        <p>Fundraisers, spirit nights, and volunteer sign-ups will be listed here.</p>
-      `
+      body: `<div id="eventsList"><p>Loading…</p></div>`
     },
     donate: {
       tag: "DONATE",
@@ -189,8 +186,37 @@
       document.getElementById('modalZelleHandle').textContent = SITE_CONFIG.donate.zelleHandle;
     }
 
+    if (key === 'events') {
+      loadEvents();
+    }
+
     document.getElementById('lockerModal').classList.add('open');
     document.body.style.overflow = 'hidden';
+  }
+
+  async function loadEvents() {
+    const events = await fetchSheet(SITE_CONFIG.sheets.events, 'data/sample-events.csv');
+    const list = document.getElementById('eventsList');
+    if (!list) return;
+
+    if (!events.length) {
+      list.innerHTML = '<p>No events posted yet.</p>';
+      return;
+    }
+
+    const sorted = events.slice().sort((a, b) => new Date(a.Date) - new Date(b.Date));
+    list.innerHTML = sorted.map(e => {
+      const d = new Date(e.Date + 'T00:00:00');
+      const dateLabel = isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      return `
+        <div style="border-bottom:1px solid var(--line); padding:16px 0;">
+          <p style="color:var(--red); font-size:0.85rem; font-weight:600; margin:0 0 4px;">${dateLabel}${e.Time ? ' · ' + e.Time : ''}</p>
+          <h3 style="margin:0 0 4px;">${e.Title || ''}</h3>
+          ${e.Location ? `<p style="color:var(--muted); font-size:0.9rem; margin:0 0 8px;">${e.Location}</p>` : ''}
+          <p style="margin:0;">${e.Details || ''}</p>
+        </div>
+      `;
+    }).join('');
   }
 
   function closeLocker() {

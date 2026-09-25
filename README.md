@@ -95,16 +95,23 @@ Same columns as Press Room (`Featured` is simply unused here). The
 Archived Clippings page also has year tabs (2018–2026) that filter rows
 by the year in `Date`.
 
+**Events tab**
+`Date, Title, Time, Location, Details`
+- `Date` in `YYYY-MM-DD` format — rows are sorted soonest-first
+  automatically
+- Shows up in the Dugout Club page's Events locker — add a row for each
+  fundraiser, spirit night, or volunteer event
+
 See `data/sample-schedule.csv`, `data/sample-roster.csv`,
 `data/sample-photos.csv`, `data/sample-coaches.csv`, `data/sample-alumni.csv`,
-`data/sample-press-room.csv`, and `data/sample-archived-clippings.csv` in
-this folder for the exact format — the live site falls back to these
-sample files automatically until the real sheet is connected, so the site
-never looks broken or empty.
+`data/sample-press-room.csv`, `data/sample-archived-clippings.csv`, and
+`data/sample-events.csv` in this folder for the exact format — the live
+site falls back to these sample files automatically until the real sheet
+is connected, so the site never looks broken or empty.
 
 ## 2. Publish each tab as CSV
 
-For each of the seven tabs:
+For each of the eight tabs:
 1. File > Share > Publish to web
 2. Under "Link", choose the specific sheet/tab (not "Entire document")
 3. Choose "Comma-separated values (.csv)" as the format
@@ -123,7 +130,8 @@ sheets: {
   coaches: "https://docs.google.com/.../pub?output=csv",
   alumni: "https://docs.google.com/.../pub?output=csv",
   pressRoom: "https://docs.google.com/.../pub?output=csv",
-  archivedClippings: "https://docs.google.com/.../pub?output=csv"
+  archivedClippings: "https://docs.google.com/.../pub?output=csv",
+  events: "https://docs.google.com/.../pub?output=csv"
 }
 ```
 
