@@ -26,7 +26,7 @@ const SITE_CONFIG = {
   // External stats provider — link to the team's MaxPreps or GameChanger page.
   stats: {
     label: "MaxPreps",
-    url: "PLACEHOLDER_MAXPREPS_OR_GAMECHANGER_URL"
+    url: "https://www.maxpreps.com/ca/newhall/hart-hawks/baseball/"
   },
 
   // Dugout Club donations
