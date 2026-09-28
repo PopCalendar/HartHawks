@@ -26,20 +26,23 @@
   }
 
   .retro-body {
-    background: var(--parchment);
-    background-image:
-      repeating-linear-gradient(135deg, rgba(0,0,0,0.015) 0 2px, transparent 2px 26px),
-      radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.05), transparent 60%);
+    background:
+      linear-gradient(rgba(10,8,4,0.72), rgba(10,8,4,0.82)),
+      url('assets/history-team-photo.jpg') center/cover no-repeat fixed;
+  }
+  @media (max-width: 900px) {
+    .retro-body { background-attachment: scroll; }
   }
 
   .retro-heading {
     font-family: 'Rye', 'Oswald', serif;
     font-weight: 400;
-    color: #1b1b1b;
+    color: var(--parchment);
     font-size: 2rem;
     text-align: center;
     letter-spacing: 0.01em;
     margin-bottom: 6px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
   }
 
   .retro-divider {
@@ -57,15 +60,29 @@
   .retro-divider .line.right { background: linear-gradient(to left, transparent, var(--gold)); }
   .retro-divider .star { color: var(--gold); font-size: 1.1rem; }
 
-  .history-copy {
+  .history-box {
     max-width: 720px;
     margin: 0 auto 64px;
+    background: var(--parchment);
+    background-image:
+      repeating-linear-gradient(135deg, rgba(0,0,0,0.015) 0 2px, transparent 2px 26px),
+      radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.05), transparent 60%);
+    padding: 4px;
+    box-shadow: 0 16px 34px rgba(0,0,0,0.4);
+  }
+  .history-box .frame-inner {
+    border: 2px solid var(--gold);
+    padding: 36px 40px;
+  }
+
+  .history-copy {
     font-family: 'Source Serif 4', 'Source Sans 3', serif;
     font-size: 1.08rem;
     line-height: 1.85;
     color: #2a2620;
   }
   .history-copy p { margin: 0 0 22px; }
+  .history-copy p:last-of-type { margin-bottom: 0; }
   .history-copy p:first-of-type::first-letter {
     font-family: 'Rye', serif;
     font-size: 3.6rem;
@@ -189,10 +206,14 @@
 
   <div class="section">
     <div class="container">
-      <div class="history-copy">
-        <p>Hart Hawks Baseball has been part of William S. Hart High School since 1948, built by the players who wore the uniform, the coaches who shaped them, and the families who showed up year after year to fill the stands.</p>
-        <p>Across the decades, the program has claimed 34 league championships, 2 CIF championships, and 3 CIF runner-up finishes — a tradition documented in full on the Tradition of Champions banner below.</p>
-        <p>After a 25-year career leading the program, Coach Jim Ozella passed the torch in 2024 to Hart Baseball alumnus Brad Meza, who now carries that tradition forward as Head Coach.</p>
+      <div class="history-box">
+        <div class="frame-inner">
+          <div class="history-copy">
+            <p>Hart Hawks Baseball has been part of William S. Hart High School since 1948, built by the players who wore the uniform, the coaches who shaped them, and the families who showed up year after year to fill the stands.</p>
+            <p>Across the decades, the program has claimed 34 league championships, 2 CIF championships, and 3 CIF runner-up finishes — a tradition documented in full on the Tradition of Champions banner below.</p>
+            <p>After a 25-year career leading the program, Coach Jim Ozella passed the torch in 2024 to Hart Baseball alumnus Brad Meza, who now carries that tradition forward as Head Coach.</p>
+          </div>
+        </div>
       </div>
 
       <h2 class="retro-heading">Tradition of Champions</h2>
