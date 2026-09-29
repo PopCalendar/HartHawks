@@ -22,6 +22,38 @@
   @media (max-width: 900px) {
     .diamond-section { background-attachment: scroll; }
   }
+  .electric-band {
+    position: relative;
+    background: var(--black);
+    height: 340px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .electric-stage {
+    position: relative;
+    height: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    cursor: crosshair;
+    touch-action: manipulation;
+  }
+  .electric-stage canvas {
+    position: absolute;
+    inset: 0;
+  }
+  .electric-fallback {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 62%;
+    width: auto;
+    transition: opacity 0.8s ease;
+  }
+  .electric-logo-ready .electric-fallback { opacity: 0; }
+  @media (max-width: 640px) {
+    .electric-band { height: 230px; }
+  }
 </style>
 </head>
 <body>
@@ -61,6 +93,12 @@
     </nav>
   </div>
 </header>
+
+<section class="electric-band">
+  <div class="electric-stage" id="electricLogo" role="img" aria-label="Hart Hawks logo">
+    <img class="electric-fallback" src="assets/logo.png" alt="">
+  </div>
+</section>
 
 <section class="hero">
   <div class="container">
@@ -116,6 +154,26 @@
 
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
+<script src="js/electric-logo.js"></script>
+<script>
+  // Electric logo band — if the browser can't run it, the plain logo stays.
+  ElectricLogo.init(document.getElementById('electricLogo'), {
+    src: 'assets/logo.png',
+    color: '#f7b4b2',
+    glowColor: '#f4291a',
+    scale: 0.7,
+    intensity: 1.5,
+    glow: 1.3,
+    thickness: 1.8,
+    strands: 4,
+    bend: 0.6,
+    crackle: 1.5,
+    arcs: 1,
+    fill: 0.25,
+    speed: 2.5,
+    interactive: true
+  });
+</script>
 <script>
   document.addEventListener('DOMContentLoaded', async () => {
     const wrap = document.getElementById('socialLinks');
