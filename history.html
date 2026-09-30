@@ -251,10 +251,18 @@
       grid.innerHTML = '<p style="text-align:center; grid-column:1/-1;">No inductees posted yet.</p>';
       return;
     }
+    // Photo framing: which part of each photo shows in the circle.
+    // "center 20%" = keep it centered side-to-side and shift toward the top
+    // (lower % = further up the photo). An optional "PhotoPosition" column in
+    // the sheet overrides these, e.g. center 10%.
+    const PHOTO_POSITION = {
+      'Kevin Foderaro': 'center 20%',
+      'Chris Baker': 'center 20%'
+    };
     const sorted = inductees.slice().sort((a, b) => (b.Year || '') - (a.Year || ''));
     grid.innerHTML = sorted.map(p => `
       <div class="wof-card">
-        <img class="wof-photo" src="${p.Photo || ''}" alt="${p.Name || ''}">
+        <img class="wof-photo" src="${p.Photo || ''}" alt="${p.Name || ''}" style="object-position:${p.PhotoPosition || PHOTO_POSITION[(p.Name || '').trim()] || 'center'};">
         <h3>${p.Name || ''}</h3>
         <div class="wof-year">CLASS OF ${p.Year || ''}</div>
         <p class="achievement">${p.Achievement || ''}</p>
