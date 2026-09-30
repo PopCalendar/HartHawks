@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alumni — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .alumni-hero-wrap {
+    background:
+      linear-gradient(rgba(8,8,8,0.55), rgba(8,8,8,0.75)),
+      url('assets/alumni-background.jpg') center/cover no-repeat fixed;
+  }
+  .alumni-hero-wrap .page-header { background: transparent; }
+  .alumni-hero-wrap .section { background: transparent; padding: 56px 0 72px; }
+  .alumni-hero-wrap .team-tab { color: #f0ede6; }
+  .alumni-hero-wrap .team-tab.active { color: #fff; border-bottom-color: var(--red); }
+  .alumni-hero-wrap .team-tabs { border-bottom-color: rgba(255,255,255,0.35); }
+  .alumni-hero-wrap #alumniGrid > p { color: #f0ede6; }
+  @media (max-width: 900px) {
+    .alumni-hero-wrap { background-attachment: scroll; }
+  }
+</style>
 </head>
 <body>
 
@@ -44,6 +60,8 @@
   </div>
 </header>
 
+<div class="alumni-hero-wrap">
+
 <div class="page-header">
   <div class="container">
     <h1>Alumni</h1>
@@ -62,6 +80,8 @@
     <div class="card-grid" id="alumniGrid"></div>
   </div>
 </div>
+
+</div><!-- /alumni-hero-wrap -->
 
 <div class="modal-overlay" id="alumniModal">
   <div class="modal-box">
