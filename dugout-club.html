@@ -5,6 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dugout Club — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  /* Dugout Club: sit the white tiles on the footlocker drawers */
+  .locker-photo-wrap .locker-label { top: 90.9%; }
+
+  /* Phones: lockers are too narrow for the tiles, so show them in a row
+     under the photo instead (same look and red highlight). */
+  .locker-tile-bar { display: none; }
+  @media (max-width: 700px) {
+    .locker-photo-wrap .locker-label { display: none; }
+    .locker-tile-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      max-width: 1100px;
+      margin: 14px auto 0;
+      padding: 0 12px;
+    }
+    .locker-tile-bar button {
+      background: #f6f3ec;
+      color: #111;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      padding: 7px 12px;
+      border: 1px solid rgba(0,0,0,0.15);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.45);
+      cursor: pointer;
+      transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease;
+    }
+    .locker-tile-bar button:hover,
+    .locker-tile-bar button:focus-visible,
+    .locker-tile-bar button:active {
+      background: var(--red);
+      color: #fff;
+      transform: scale(1.06);
+      outline: none;
+    }
+  }
+</style>
 </head>
 <body>
 
@@ -56,22 +97,22 @@
     <div class="locker-photo-wrap">
       <img class="locker-photo" src="assets/locker-room.jpg" alt="Hart Hawks baseball locker room">
 
-      <button class="locker-hotspot" data-section="about" style="left:24.56%; top:37.11%; width:8.72%; height:38.41%;">
+      <button class="locker-hotspot" data-section="about" style="left:24.56%; top:37.11%; width:8.72%; height:39.7%;">
         <span class="locker-label">About</span>
       </button>
-      <button class="locker-hotspot" data-section="board" style="left:33.28%; top:37.11%; width:8.51%; height:38.41%;">
+      <button class="locker-hotspot" data-section="board" style="left:33.28%; top:37.11%; width:8.51%; height:39.7%;">
         <span class="locker-label">Board</span>
       </button>
-      <button class="locker-hotspot" data-section="sponsors" style="left:41.79%; top:37.11%; width:8.72%; height:38.41%;">
+      <button class="locker-hotspot" data-section="sponsors" style="left:41.79%; top:37.11%; width:8.72%; height:39.7%;">
         <span class="locker-label">Sponsors</span>
       </button>
-      <button class="locker-hotspot" data-section="events" style="left:50.51%; top:37.11%; width:8.36%; height:38.41%;">
+      <button class="locker-hotspot" data-section="events" style="left:50.51%; top:37.11%; width:8.36%; height:39.7%;">
         <span class="locker-label">Events</span>
       </button>
-      <button class="locker-hotspot" data-section="donate" style="left:58.87%; top:37.11%; width:8.57%; height:38.41%;">
+      <button class="locker-hotspot" data-section="donate" style="left:58.87%; top:37.11%; width:8.57%; height:39.7%;">
         <span class="locker-label">Donate</span>
       </button>
-      <button class="locker-hotspot" data-section="bylaws" style="left:67.44%; top:37.11%; width:8.51%; height:38.41%;">
+      <button class="locker-hotspot" data-section="bylaws" style="left:67.44%; top:37.11%; width:8.51%; height:39.7%;">
         <span class="locker-label">Bylaws</span>
       </button>
     </div>
@@ -160,9 +201,18 @@
   };
 
   document.addEventListener('DOMContentLoaded', () => {
+    // Phone tile row under the photo, built from the same six lockers
+    const tileBar = document.createElement('div');
+    tileBar.className = 'locker-tile-bar';
     document.querySelectorAll('.locker-hotspot').forEach(hotspot => {
       hotspot.addEventListener('click', () => openLocker(hotspot.dataset.section));
+      const tile = document.createElement('button');
+      tile.type = 'button';
+      tile.textContent = hotspot.querySelector('.locker-label').textContent;
+      tile.addEventListener('click', () => openLocker(hotspot.dataset.section));
+      tileBar.appendChild(tile);
     });
+    document.querySelector('.locker-photo-wrap').after(tileBar);
     document.getElementById('lockerModalClose').addEventListener('click', closeLocker);
     document.getElementById('lockerModal').addEventListener('click', (e) => {
       if (e.target.id === 'lockerModal') closeLocker();
