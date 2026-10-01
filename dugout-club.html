@@ -6,14 +6,14 @@
 <title>Dugout Club — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  /* Dugout Club: sit the white tiles on the footlocker drawers */
-  .locker-photo-wrap .locker-label { top: 90.9%; }
+  /* Dugout Club: no tiles on the photo — the printed nameplates label each
+     locker. Hovering a locker still tints it red. */
+  .locker-photo-wrap .locker-label { display: none; }
 
-  /* Phones: lockers are too narrow for the tiles, so show them in a row
+  /* Phones: the nameplates are too small to read, so show tiles in a row
      under the photo instead (same look and red highlight). */
   .locker-tile-bar { display: none; }
   @media (max-width: 700px) {
-    .locker-photo-wrap .locker-label { display: none; }
     .locker-tile-bar {
       display: flex;
       flex-wrap: wrap;
