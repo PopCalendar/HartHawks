@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stats — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .stats-hero-wrap {
+    background:
+      linear-gradient(rgba(8,8,8,0.5), rgba(8,8,8,0.72)),
+      url('assets/stats-background.jpg') center 45%/cover no-repeat fixed;
+    min-height: 560px;
+  }
+  .stats-hero-wrap .page-header { background: transparent; }
+  .stats-hero-wrap .section { background: transparent; padding: 56px 0 120px; }
+  .stats-hero-wrap .section p { color: #f0ede6; font-size: 1.1rem; }
+  @media (max-width: 900px) {
+    .stats-hero-wrap { background-attachment: scroll; min-height: 460px; }
+  }
+</style>
 </head>
 <body>
 
@@ -44,6 +58,8 @@
   </div>
 </header>
 
+<div class="stats-hero-wrap">
+
 <div class="page-header">
   <div class="container">
     <h1>Stats</h1>
@@ -57,6 +73,8 @@
     <p><a class="btn btn-solid" style="border-color:var(--black); color:var(--black); background:var(--paper);" id="statsLink" href="#" target="_blank" rel="noopener">View full stats on MaxPreps →</a></p>
   </div>
 </div>
+
+</div><!-- /stats-hero-wrap -->
 
 <footer class="site-footer">
   <div class="container">
