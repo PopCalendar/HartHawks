@@ -20,6 +20,18 @@
   @media (max-width: 900px) {
     .schedule-hero-wrap { background-attachment: scroll; }
   }
+  .calendar-cell.past { background: #e9e6df; }
+  .calendar-cell.past .date-num { color: #aaa49a; }
+  .calendar-cell.past .game-card { opacity: 0.6; }
+  .calendar-cell.today { box-shadow: inset 0 0 0 3px var(--red); }
+  .calendar-cell.today .date-num { color: var(--red); font-weight: 700; }
+  #todayMonth { background: var(--red); color: #fff; border-color: var(--red); }
+  .past-results-head { margin: 34px 0 12px; border-top: 1px solid rgba(255,255,255,0.25); padding-top: 22px; }
+  .past-results-head h3 { margin: 0; color: #f0ede6; }
+  .ticket.past { opacity: 0.72; }
+  .schedule-note { color: #f0ede6; }
+  .schedule-hero-wrap .schedule-list .section-head h2 { color: #fff; }
+  .schedule-hero-wrap .schedule-list .section-head { border-bottom-color: rgba(255,255,255,0.35); }
 </style>
 </head>
 <body>
@@ -80,6 +92,7 @@
         <div class="month-label">Month Year</div>
         <div class="month-nav">
           <button id="prevMonth">← Prev</button>
+          <button id="todayMonth" hidden>Today</button>
           <button id="nextMonth">Next →</button>
         </div>
       </div>
@@ -88,7 +101,7 @@
 
       <div class="schedule-list">
         <div class="section-head">
-          <h2>Full season list</h2>
+          <h2>Upcoming games</h2>
           <span class="tag">ALL GAMES</span>
         </div>
         <div id="scheduleList"></div>
