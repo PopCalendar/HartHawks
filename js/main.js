@@ -96,8 +96,17 @@ function renderLinkPreviewCards(container, rows, emptyMessage) {
  */
 async function fetchFolderImages(folderPath) {
   const { owner, name, branch } = SITE_CONFIG.repo;
-  const cleanPath = folderPath.replace(/^\/+|\/+$/g, '');
-  const url = `https://api.github.com/repos/${owner}/${name}/contents/${cleanPath}?ref=${branch}`;
+  // Accept a plain folder path ("Photos/Opening Day") or a full site link
+  // ("https://popcalendar.github.io/HartHawks/Photos/Opening Day") and turn
+  // it into the folder path inside the repo.
+  let cleanPath = String(folderPath || '').trim();
+  const repoMarker = new RegExp('^.*?/' + name + '/', 'i');
+  if (/^https?:\/\//i.test(cleanPath)) cleanPath = cleanPath.replace(repoMarker, '');
+  try { cleanPath = decodeURIComponent(cleanPath); } catch (e) {}
+  cleanPath = cleanPath.replace(/^\/+|\/+$/g, '');
+  if (!cleanPath) return [];
+  const encodedPath = cleanPath.split('/').map(encodeURIComponent).join('/');
+  const url = `https://api.github.com/repos/${owner}/${name}/contents/${encodedPath}?ref=${branch}`;
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error('folder not found');
