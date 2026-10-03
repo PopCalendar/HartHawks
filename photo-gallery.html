@@ -83,6 +83,24 @@
   let ALBUM_IMAGES = [];
   let ALBUM_INDEX = 0;
 
+  // Album cover: the photo named in the sheet's optional "Cover" column
+  // (just the file name, e.g. IMG_1234.jpg — a full link also works), or the
+  // first photo in the folder if Cover is blank or doesn't match a file.
+  function pickCover(images, cover) {
+    const fileName = u => {
+      const last = String(u || '').trim().split('?')[0].split('/').pop();
+      try { return decodeURIComponent(last).toLowerCase(); } catch (e) { return last.toLowerCase(); }
+    };
+    const stripExt = n => n.replace(/\.[a-z0-9]+$/i, '');
+    const want = fileName(cover);
+    if (want) {
+      const match = images.find(u => fileName(u) === want) ||
+                    images.find(u => stripExt(fileName(u)) === stripExt(want));
+      if (match) return match;
+    }
+    return images[0];
+  }
+
   document.addEventListener('DOMContentLoaded', async () => {
     const albums = await fetchSheet(SITE_CONFIG.sheets.photos, 'data/sample-photos.csv');
     const grid = document.getElementById('photoGrid');
@@ -103,7 +121,7 @@
         const images = await fetchFolderImages(a.Folder || '');
         const coverEl = document.getElementById(`cover-${i}`);
         if (images.length && coverEl) {
-          coverEl.style.backgroundImage = `url('${images[0]}')`;
+          coverEl.style.backgroundImage = `url('${pickCover(images, a.Cover)}')`;
         }
       });
 
