@@ -71,6 +71,19 @@
   /* Zelle QR: a bit larger, crisp edges so it scans easily */
   .donate-panel img.qr { width: 200px; height: 200px; image-rendering: pixelated; border: none; }
   .zelle-phone-note { font-size: 0.8rem; color: var(--muted); margin: 0; }
+  /* Sponsors locker: packet cover that opens the full PDF */
+  .sponsor-packet { display: block; max-width: 380px; margin: 4px auto 0; text-decoration: none; }
+  .sponsor-packet img {
+    display: block; width: 100%; height: auto;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.3);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .sponsor-packet:hover img { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.38); }
+  .sponsor-packet-cta {
+    display: block; margin-top: 14px; text-align: center;
+    font-family: 'Oswald', sans-serif; font-weight: 600; color: var(--red);
+  }
+  .sponsor-packet:hover .sponsor-packet-cta { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -187,8 +200,10 @@
       tag: "SPONSORS",
       title: "Our Sponsors",
       body: `
-        <div class="placeholder-note">Placeholder — edit the "sponsors" entry in dugout-club.html to list real sponsor names/logos once you have them.</div>
-        <p>Thank you to the local businesses supporting Hart Hawks Baseball this season. Sponsor names and logos go here.</p>
+        <a class="sponsor-packet" href="assets/sponsorship-packet.pdf" target="_blank" rel="noopener">
+          <img src="assets/sponsorship-cover.jpg" alt="Hart Baseball 2026–2027 Sponsorship Opportunities — click to open the full packet">
+          <span class="sponsor-packet-cta">View the full sponsorship packet (PDF) →</span>
+        </a>
       `
     },
     events: {
