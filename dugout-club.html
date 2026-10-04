@@ -68,6 +68,9 @@
   .event-row.past .event-when { color: var(--muted); }
   .event-row.past h3, .event-row.past .event-details { opacity: 0.8; }
   .event-empty { color: var(--muted); padding: 16px 0; margin: 0; }
+  /* Zelle QR: a bit larger, crisp edges so it scans easily */
+  .donate-panel img.qr { width: 200px; height: 200px; image-rendering: pixelated; border: none; }
+  .zelle-phone-note { font-size: 0.8rem; color: var(--muted); margin: 0; }
 </style>
 </head>
 <body>
@@ -208,7 +211,8 @@
             <h3>Give with Zelle</h3>
             <p>Scan to send directly, no fees.</p>
             <img class="qr" id="modalZelleQr" src="" alt="Zelle QR code">
-            <p id="modalZelleHandle" style="font-size:0.9rem; color:var(--muted);"></p>
+            <p id="modalZelleHandle" style="font-size:0.9rem; color:var(--muted); margin-bottom:4px;"></p>
+            <p class="zelle-phone-note">On your phone? Open Zelle in your banking app and send to the email above.</p>
           </div>
         </div>
       `
