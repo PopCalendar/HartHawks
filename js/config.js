@@ -21,7 +21,7 @@ const SITE_CONFIG = {
     archivedClippings: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1213269122&single=true&output=csv",
     events: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=222442044&single=true&output=csv",
     wallOfFame: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=563289045&single=true&output=csv",
-    headCoaches: "PLACEHOLDER_HEAD_COACHES_CSV_URL"
+    headCoaches: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGiToWoxDDXDsBQq_xYTBRGJrevXES0PpkgGFhdVzWfUOtJDoFwSKanfZ1S0s2iYX-5rvP6SDr2IqA/pub?gid=1716934991&single=true&output=csv"
   },
 
   // External stats provider — link to the team's MaxPreps or GameChanger page.
