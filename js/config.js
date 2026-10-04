@@ -32,7 +32,7 @@ const SITE_CONFIG = {
   // Dugout Club donations
   donate: {
     paypalUrl: "https://www.paypal.com/donate/?hosted_button_id=7EP5WYB7CZGS2",
-    zelleQrImage: "assets/zelle-qr-placeholder.png",
+    zelleQrImage: "assets/zelle-qr.png",
     zelleHandle: "hartdugoutclub@gmail.com"
   },
 
