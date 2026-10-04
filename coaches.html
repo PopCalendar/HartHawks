@@ -167,6 +167,19 @@
     .plate { grid-template-columns: 1fr; gap: 2px; padding: 10px 20px; text-align: center; }
     .plate-years { padding-left: 0; }
   }
+  /* Page background: vintage aerial photo of Hart's field */
+  .coaches-bg-wrap {
+    background:
+      linear-gradient(rgba(10,10,10,0.62), rgba(10,10,10,0.82)),
+      url('assets/coaches-background.jpg') center/cover no-repeat fixed;
+  }
+  .coaches-bg-wrap .page-header,
+  .coaches-bg-wrap .coach-gallery-section,
+  .coaches-bg-wrap .tunnel-section,
+  .coaches-bg-wrap .plaque-section { background: transparent; }
+  @media (max-width: 900px) {
+    .coaches-bg-wrap { background-attachment: scroll; }
+  }
 </style>
 </head>
 <body>
@@ -207,6 +220,8 @@
   </div>
 </header>
 
+<div class="coaches-bg-wrap">
+
 <div class="page-header">
   <div class="container">
     <h1>Coaches</h1>
@@ -242,6 +257,8 @@
     </div>
   </div>
 </section>
+
+</div><!-- /coaches-bg-wrap -->
 
 <div class="modal-overlay" id="coachModal">
   <div class="modal-box">
