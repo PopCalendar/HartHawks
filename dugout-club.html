@@ -45,6 +45,29 @@
       outline: none;
     }
   }
+  /* Events locker: Upcoming / Past Events */
+  .event-tabs { display: flex; gap: 8px; margin: 0 0 6px; }
+  .event-tab {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    padding: 7px 16px;
+    background: var(--paper);
+    color: #111;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: background 0.12s ease, color 0.12s ease;
+  }
+  .event-tab:hover { border-color: var(--red); }
+  .event-tab.active { background: var(--red); color: #fff; border-color: var(--red); }
+  .event-row { border-bottom: 1px solid var(--line); padding: 16px 0; }
+  .event-row h3 { margin: 0 0 4px; }
+  .event-when { color: var(--red); font-size: 0.85rem; font-weight: 600; margin: 0 0 4px; }
+  .event-where { color: var(--muted); font-size: 0.9rem; margin: 0 0 8px; }
+  .event-details { margin: 0; }
+  .event-row.past .event-when { color: var(--muted); }
+  .event-row.past h3, .event-row.past .event-details { opacity: 0.8; }
+  .event-empty { color: var(--muted); padding: 16px 0; margin: 0; }
 </style>
 </head>
 <body>
@@ -243,6 +266,29 @@
     document.body.style.overflow = 'hidden';
   }
 
+  // Events: upcoming vs. past. An event stays "upcoming" through its own
+  // date and moves to Past Events automatically the next day.
+  function parseEventDate(value) {
+    const v = String(value || '').trim();
+    let m = v.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
+    m = v.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+    if (m) return new Date(m[3].length === 2 ? 2000 + +m[3] : +m[3], +m[1] - 1, +m[2]);
+    return null;
+  }
+
+  function eventHtml(e, d, isPast) {
+    const dateLabel = d ? d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+    return `
+      <div class="event-row${isPast ? ' past' : ''}">
+        <p class="event-when">${dateLabel}${e.Time ? ' · ' + e.Time : ''}</p>
+        <h3>${e.Title || ''}</h3>
+        ${e.Location ? `<p class="event-where">${e.Location}</p>` : ''}
+        <p class="event-details">${e.Details || ''}</p>
+      </div>
+    `;
+  }
+
   async function loadEvents() {
     const events = await fetchSheet(SITE_CONFIG.sheets.events, 'data/sample-events.csv');
     const list = document.getElementById('eventsList');
@@ -253,19 +299,38 @@
       return;
     }
 
-    const sorted = events.slice().sort((a, b) => new Date(a.Date) - new Date(b.Date));
-    list.innerHTML = sorted.map(e => {
-      const d = new Date(e.Date + 'T00:00:00');
-      const dateLabel = isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-      return `
-        <div style="border-bottom:1px solid var(--line); padding:16px 0;">
-          <p style="color:var(--red); font-size:0.85rem; font-weight:600; margin:0 0 4px;">${dateLabel}${e.Time ? ' · ' + e.Time : ''}</p>
-          <h3 style="margin:0 0 4px;">${e.Title || ''}</h3>
-          ${e.Location ? `<p style="color:var(--muted); font-size:0.9rem; margin:0 0 8px;">${e.Location}</p>` : ''}
-          <p style="margin:0;">${e.Details || ''}</p>
-        </div>
-      `;
-    }).join('');
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const rows = events.map(e => ({ e, d: parseEventDate(e.Date) }));
+    const upcoming = rows.filter(r => !r.d || r.d >= today).sort((a, b) => (a.d || 0) - (b.d || 0));
+    const past = rows.filter(r => r.d && r.d < today).sort((a, b) => b.d - a.d);
+
+    list.innerHTML = `
+      <div class="event-tabs" role="tablist">
+        <button class="event-tab active" data-view="upcoming" role="tab">Upcoming</button>
+        <button class="event-tab" data-view="past" role="tab">Past Events${past.length ? ` (${past.length})` : ''}</button>
+      </div>
+      <div class="event-view" data-view="upcoming">
+        ${upcoming.length
+          ? upcoming.map(r => eventHtml(r.e, r.d, false)).join('')
+          : `<p class="event-empty">No upcoming events right now — check back soon${past.length ? ', or see Past Events above' : ''}.</p>`}
+      </div>
+      <div class="event-view" data-view="past" hidden>
+        ${past.length
+          ? past.map(r => eventHtml(r.e, r.d, true)).join('')
+          : '<p class="event-empty">No past events yet.</p>'}
+      </div>
+    `;
+
+    const title = document.getElementById('lockerModalTitle');
+    list.querySelectorAll('.event-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const view = tab.dataset.view;
+        list.querySelectorAll('.event-tab').forEach(t => t.classList.toggle('active', t === tab));
+        list.querySelectorAll('.event-view').forEach(v => { v.hidden = v.dataset.view !== view; });
+        title.textContent = view === 'past' ? 'Past Events' : 'Upcoming Events';
+      });
+    });
   }
 
   function closeLocker() {
