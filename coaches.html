@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Coaches — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap">
 <style>
   .coach-gallery-section {
     background: #0e0e0e;
@@ -56,6 +57,115 @@
     .coach-gallery-nav { width: 40px; height: 40px; font-size: 1.3rem; }
     .coach-gallery-nav.prev { left: 10px; }
     .coach-gallery-nav.next { right: 10px; }
+  }
+  /* ---- Head Coaches plaque ---- */
+  .plaque-section { background: #0e0e0e; padding: 24px 16px 72px; }
+  .plaque {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 14px;
+    border-radius: 6px;
+    background:
+      repeating-linear-gradient(92deg, rgba(255,255,255,0.025) 0 2px, rgba(0,0,0,0.04) 2px 7px),
+      linear-gradient(160deg, #4a2c1a 0%, #33190d 45%, #4a2a17 100%);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.06);
+  }
+  .plaque-inner {
+    border: 3px solid #b8924a;
+    outline: 1px solid #6e5428;
+    outline-offset: -9px;
+    border-radius: 3px;
+    padding: 34px 30px 30px;
+    box-shadow: inset 0 0 24px rgba(0,0,0,0.45);
+  }
+  .plaque-head { text-align: center; margin-bottom: 26px; }
+  .plaque-head p, .plaque-foot { max-width: none; margin-left: auto; margin-right: auto; }
+  .plaque-head img { width: 74px; height: auto; display: block; margin: 0 auto 10px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.6)); }
+  .plaque-kicker {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.32em;
+    font-size: 0.78rem;
+    color: #c9a55c;
+    margin: 0 0 6px;
+  }
+  .plaque-title {
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin: 0;
+    background: linear-gradient(180deg, #f6e3a8 0%, #d4ad5c 45%, #9c7631 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+  }
+  .plaque-sub {
+    font-family: 'Cinzel', Georgia, serif;
+    color: #c9a55c;
+    font-size: 0.9rem;
+    letter-spacing: 0.18em;
+    margin: 6px 0 0;
+  }
+  .plaque-list { display: flex; flex-direction: column; gap: 10px; }
+  .plate {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 18px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, #e9cf8b 0%, #cfa957 48%, #b8913f 52%, #d8b768 100%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(0,0,0,0.25);
+    position: relative;
+  }
+  /* little screw heads */
+  .plate::before, .plate::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 7px; height: 7px;
+    margin-top: -3.5px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #f4e2ad, #8a6a2c);
+    box-shadow: inset 0 0 1px rgba(0,0,0,0.6);
+  }
+  .plate::before { left: 6px; }
+  .plate::after { right: 6px; }
+  .plate-years {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    color: #3a2810;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+    padding-left: 6px;
+  }
+  .plate-name {
+    font-family: 'Cinzel', Georgia, serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #2a1c08;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.45);
+    margin: 0;
+  }
+  .plate-details {
+    font-size: 0.85rem;
+    color: #4a3614;
+    margin: 2px 0 0;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+  }
+  .plate-record { font-weight: 700; }
+  .plate.unknown { background: linear-gradient(180deg, #a98c55 0%, #8f7442 50%, #9d8150 100%); opacity: 0.75; }
+  .plate.unknown .plate-name { font-size: 1rem; font-style: italic; font-weight: 600; color: #3a2a10; }
+  .plaque-foot {
+    text-align: center;
+    font-size: 0.82rem;
+    color: #c9a55c;
+    margin: 22px 0 0;
+  }
+  @media (max-width: 560px) {
+    .plaque-inner { padding: 26px 14px 20px; }
+    .plate { grid-template-columns: 1fr; gap: 2px; padding: 10px 20px; text-align: center; }
+    .plate-years { padding-left: 0; }
   }
 </style>
 </head>
@@ -118,6 +228,21 @@
   </div>
 </div>
 
+<section class="plaque-section" aria-labelledby="plaqueTitle">
+  <div class="plaque">
+    <div class="plaque-inner">
+      <div class="plaque-head">
+        <img src="assets/logo.png" alt="">
+        <p class="plaque-kicker">A TRADITION OF CHAMPIONS</p>
+        <h2 class="plaque-title" id="plaqueTitle">Hart Baseball Head Coaches</h2>
+        <p class="plaque-sub">SINCE 1945</p>
+      </div>
+      <div class="plaque-list" id="plaqueList"></div>
+      <p class="plaque-foot" id="plaqueFoot" hidden>Know who coached in a missing year? Let the Dugout Club know so we can add them.</p>
+    </div>
+  </div>
+</section>
+
 <div class="modal-overlay" id="coachModal">
   <div class="modal-box">
     <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
@@ -138,6 +263,43 @@
 <script src="js/main.js"></script>
 <script src="js/circular-gallery.js"></script>
 <script>
+  // Head Coaches plaque (from the "headCoaches" sheet tab)
+  async function loadHeadCoaches() {
+    const list = document.getElementById('plaqueList');
+    if (!list) return;
+    const esc = v => String(v || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    let rows = [];
+    try {
+      rows = await fetchSheet(SITE_CONFIG.sheets.headCoaches, 'data/sample-head-coaches.csv');
+    } catch (e) {}
+    rows = rows.filter(r => (r.Years || '').trim());
+    if (!rows.length) {
+      list.innerHTML = '<p class="plaque-foot">Coaching history coming soon.</p>';
+      return;
+    }
+    let missing = 0;
+    list.innerHTML = rows.map(r => {
+      const name = (r.Coach || '').trim();
+      if (!name) {
+        missing++;
+        return `<div class="plate unknown"><div class="plate-years">${esc(r.Years)}</div><p class="plate-name">Name to be added</p></div>`;
+      }
+      const record = (r.Record || '').trim();
+      const highlights = (r.Highlights || '').trim();
+      const details = [record ? `<span class="plate-record">${esc(record)}</span>` : '', esc(highlights)].filter(Boolean).join(' · ');
+      return `
+        <div class="plate">
+          <div class="plate-years">${esc(r.Years)}</div>
+          <div>
+            <p class="plate-name">${esc(name)}</p>
+            ${details ? `<p class="plate-details">${details}</p>` : ''}
+          </div>
+        </div>`;
+    }).join('');
+    document.getElementById('plaqueFoot').hidden = missing === 0;
+  }
+  document.addEventListener('DOMContentLoaded', loadHeadCoaches);
+
   let COACH_DATA = [];
 
   document.addEventListener('DOMContentLoaded', async () => {
