@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gear — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .coming-soon { text-align: center; padding: 48px 16px 64px; }
+  .coming-soon img { width: 180px; max-width: 50%; height: auto; margin: 0 auto 24px; display: block; }
+  .coming-soon h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.15;
+    margin: 0;
+  }
+  .coming-soon h2 span { display: block; color: var(--red); }
+</style>
 </head>
 <body>
 
@@ -53,8 +64,10 @@
 
 <div class="section">
   <div class="container">
-    <p>Order Hawks spirit wear through our online store — hats, tees, hoodies, and more.</p>
-    <p><a class="btn btn-solid" style="border-color:var(--black); color:var(--black); background:var(--paper);" id="gearLink" href="#" target="_blank" rel="noopener">Shop Hawks gear →</a></p>
+    <div class="coming-soon">
+      <img src="assets/logo.png" alt="Hart Hawks logo">
+      <h2>Hart Hawks Spirit Wear <span>coming soon!</span></h2>
+    </div>
   </div>
 </div>
 
@@ -66,10 +79,5 @@
 
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('gearLink').href = SITE_CONFIG.gearStoreUrl;
-  });
-</script>
 </body>
 </html>
