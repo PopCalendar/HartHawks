@@ -5,6 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Photo Gallery — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  /* Album cards: photo area on top, label underneath */
+  .album-card {
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .album-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.15); }
+  .album-card .photo {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    background-color: #e7e3da;
+    background-size: cover;
+    background-position: center;
+  }
+  .album-card .body { padding: 14px 16px; }
+  .album-card .role { color: var(--red); font-size: 0.85rem; font-weight: 600; }
+</style>
 </head>
 <body>
 
