@@ -50,6 +50,62 @@ function splitCSVLine(line) {
 }
 
 /**
+ * A press image: links to the article when the row has a URL, otherwise
+ * clicking it opens the image full-size (lightbox). Never cropped.
+ */
+function pressImageHtml(r, className, extraStyle) {
+  if (!r.ImageURL) return '';
+  const alt = (r.Title || '').replace(/"/g, '&quot;');
+  const style = extraStyle ? ` style="${extraStyle}"` : '';
+  const img = `<img class="${className}" src="${r.ImageURL}" alt="${alt}"${style}>`;
+  if (r.URL) {
+    return `<a class="press-img-link" href="${r.URL}" target="_blank" rel="noopener" aria-label="Open article: ${alt}">${img}</a>`;
+  }
+  return `<button type="button" class="press-img-link" data-lightbox="${r.ImageURL}" data-lightbox-alt="${alt}" aria-label="View larger: ${alt}">${img}</button>`;
+}
+
+// Full-size image viewer used by press images without a link.
+function openImageLightbox(src, alt) {
+  let box = document.getElementById('imageLightbox');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'imageLightbox';
+    box.className = 'image-lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.innerHTML = '<button type="button" class="image-lightbox-close" aria-label="Close">&times;</button><img alt="">';
+    document.body.appendChild(box);
+    box.addEventListener('click', e => {
+      if (e.target === box || e.target.classList.contains('image-lightbox-close')) closeImageLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && box.classList.contains('open')) closeImageLightbox();
+    });
+  }
+  const img = box.querySelector('img');
+  img.src = src;
+  img.alt = alt || '';
+  box.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  box.querySelector('.image-lightbox-close').focus();
+}
+
+function closeImageLightbox() {
+  const box = document.getElementById('imageLightbox');
+  if (!box) return;
+  box.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('click', e => {
+  const trigger = e.target.closest && e.target.closest('[data-lightbox]');
+  if (trigger) {
+    e.preventDefault();
+    openImageLightbox(trigger.getAttribute('data-lightbox'), trigger.getAttribute('data-lightbox-alt'));
+  }
+});
+
+/**
  * Renders a list of link-preview cards (title, thumbnail + excerpt,
  * source logo/name, "Continue reading" link) into a container element.
  * Used by Press Room and Archived Clippings, sorted newest first when a
@@ -75,13 +131,13 @@ function renderLinkPreviewCards(container, rows, emptyMessage) {
       <h3>${r.URL ? `<a href="${r.URL}" target="_blank" rel="noopener">${r.Title || ''}</a>` : (r.Title || '')}</h3>
       ${dateLabel ? `<p class="link-preview-date">${dateLabel}</p>` : ''}
       <div class="link-preview-body">
-        ${r.ImageURL ? `<img class="link-preview-thumb" src="${r.ImageURL}" alt="${r.Title || ''}">` : ''}
+        ${pressImageHtml(r, 'link-preview-thumb' + (!(r.Excerpt || '').trim() ? ' solo' : ''))}
         <p class="link-preview-excerpt">${r.Excerpt || ''} ${r.URL ? `<a href="${r.URL}" target="_blank" rel="noopener">Continue reading</a>` : ''}</p>
       </div>
-      <div class="link-preview-source">
+      ${(r.Source || r.SourceLogo) ? `<div class="link-preview-source">
         ${r.SourceLogo ? `<img src="${r.SourceLogo}" alt="">` : ''}
         <span>${r.Source || ''}</span>
-      </div>
+      </div>` : ''}
     </article>
   `;
   }).join('');
