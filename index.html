@@ -204,7 +204,7 @@
     newsWrap.innerHTML = `
       <p style="color:var(--muted); font-size:0.9rem; margin-bottom:4px;">${dateLabel}</p>
       <h3 style="margin-bottom:8px;">${latest.Title || ''}</h3>
-      ${latest.ImageURL ? `<img src="${latest.ImageURL}" alt="${latest.Title || ''}" style="width:100%; max-width:560px; display:block; margin-bottom:14px; border:1px solid var(--line);">` : ''}
+      ${latest.ImageURL ? `<div style="max-width:560px; margin-bottom:14px;">${pressImageHtml(latest, '', 'width:100%; height:auto; display:block; border:1px solid var(--line);')}</div>` : ''}
       <p>${latest.Excerpt || ''} ${latest.URL ? `<a href="${latest.URL}" target="_blank" rel="noopener">Continue reading</a>` : ''}</p>
     `;
   });
