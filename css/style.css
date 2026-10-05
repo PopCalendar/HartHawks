@@ -638,12 +638,64 @@ table.roster td.jersey {
 }
 
 .link-preview-thumb {
-  width: 150px;
-  height: 110px;
-  object-fit: cover;
+  display: block;
+  width: 260px;
+  height: auto;
   flex-shrink: 0;
   background: #e7e3da;
 }
+.link-preview-thumb.solo { width: 400px; max-width: 100%; }
+
+/* Press images: whole image, clickable (article link or full-size view) */
+.press-img-link {
+  display: block;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  max-width: 100%;
+}
+a.press-img-link { cursor: pointer; }
+.press-img-link img { transition: opacity 0.15s ease, transform 0.15s ease; }
+.press-img-link:hover img { opacity: 0.9; transform: translateY(-2px); }
+.press-img-link:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 20px 24px;
+  background: rgba(0,0,0,0.88);
+  cursor: zoom-out;
+}
+.image-lightbox.open { display: flex; }
+.image-lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  cursor: default;
+}
+.image-lightbox-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.image-lightbox-close:hover { background: var(--red); }
 
 .link-preview-excerpt {
   color: var(--ink);
@@ -671,7 +723,7 @@ table.roster td.jersey {
 
 @media (max-width: 560px) {
   .link-preview-body { flex-direction: column; }
-  .link-preview-thumb { width: 100%; height: 180px; }
+  .press-img-link, .link-preview-thumb, .link-preview-thumb.solo { width: 100%; }
 }
 
 .alumni-list {
