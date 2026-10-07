@@ -122,7 +122,11 @@
   }
 
   document.addEventListener('DOMContentLoaded', async () => {
-    const albums = await fetchSheet(SITE_CONFIG.sheets.photos, 'data/sample-photos.csv');
+    // Newest album first: rows added to the bottom of the sheet show at the
+    // top of the page. Blank rows are skipped.
+    const albums = (await fetchSheet(SITE_CONFIG.sheets.photos, 'data/sample-photos.csv'))
+      .filter(a => (a.Folder || a.Caption || a.Team || '').trim())
+      .reverse();
     const grid = document.getElementById('photoGrid');
     if (!albums.length) {
       grid.innerHTML = '<p>No photo albums posted yet.</p>';
