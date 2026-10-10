@@ -3,7 +3,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.querySelector('nav.primary-nav');
   if (toggle && nav) {
-    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+    toggle.setAttribute('aria-expanded', 'false');
+    const setOpen = open => {
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.textContent = open ? 'Close' : 'Menu';
+    };
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      setOpen(!nav.classList.contains('open'));
+    });
+    // Tapping a real page link, tapping outside, or pressing Esc closes it
+    nav.addEventListener('click', e => {
+      const link = e.target.closest('a');
+      if (link && link.getAttribute('href') && link.getAttribute('href') !== '#') setOpen(false);
+      if (link && link.getAttribute('href') === '#') e.preventDefault();
+    });
+    document.addEventListener('click', e => {
+      if (nav.classList.contains('open') && !nav.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && nav.classList.contains('open')) setOpen(false);
+    });
   }
 });
 
