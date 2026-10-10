@@ -55,6 +55,11 @@ a:hover { color: var(--red-dark); }
 .site-header {
   background: var(--black);
   border-bottom: 4px solid var(--red);
+  /* Keep the header (and the mobile menu that drops out of it) above
+     page effects like the electric hawk and the coach gallery. Stays
+     below popups (z-index 100+). */
+  position: relative;
+  z-index: 50;
 }
 
 .site-header .container {
@@ -146,12 +151,19 @@ nav.primary-nav a.active {
   nav.primary-nav.open {
     display: block;
     position: absolute;
-    top: 76px;
+    top: 100%;
     left: 0;
     right: 0;
+    z-index: 50;
     background: var(--black);
+    border-bottom: 4px solid var(--red);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.45);
     padding: 12px 24px 20px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
   }
+  nav.primary-nav.open a { display: block; padding: 10px 2px; }
+  nav.primary-nav.open .dropdown a { padding: 8px 16px; }
   nav.primary-nav.open ul { flex-direction: column; gap: 4px; }
   .dropdown { position: static; display: block; border: none; padding-left: 12px; }
 }
