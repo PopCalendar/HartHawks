@@ -5,6 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Team — Hart Hawks Baseball</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  .class-roster { display: grid; gap: 28px; }
+  .class-group { background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--red); }
+  .class-head {
+    display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px;
+    padding: 16px 22px; background: var(--black); color: #fff;
+  }
+  .class-head h2 { margin: 0; color: #fff; font-family: 'Oswald', sans-serif; font-size: 1.6rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .class-head p { margin: 0; color: #d8d3c8; font-size: 0.95rem; letter-spacing: 0.04em; }
+  .class-names {
+    list-style: none; margin: 0; padding: 14px 22px 20px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); column-gap: 24px;
+  }
+  .class-names li { padding: 9px 0; border-bottom: 1px solid var(--line); font-weight: 600; }
+  .roster-note { margin: 28px auto 0; text-align: center; color: var(--muted); max-width: none; }
+  @media (max-width: 560px) {
+    .class-head { padding: 14px 16px; }
+    .class-names { padding: 8px 16px 14px; grid-template-columns: 1fr 1fr; column-gap: 14px; }
+    .class-names li { font-size: 0.95rem; }
+  }
+</style>
 </head>
 <body>
 
@@ -47,26 +68,110 @@
 <div class="page-header">
   <div class="container">
     <h1>Team</h1>
-    <p>Rosters for all three levels — updated straight from the team spreadsheet.</p>
+    <p>2026–27 Hart Baseball · 63 players, grades 9–12</p>
   </div>
 </div>
 
 <div class="section">
   <div class="container">
-
-    <div class="team-tabs">
-      <button class="team-tab active" data-team="Varsity">Varsity</button>
-      <button class="team-tab" data-team="JV">JV</button>
-      <button class="team-tab" data-team="Freshman">Freshman</button>
+    <div class="class-roster">
+      <section class="class-group">
+        <header class="class-head">
+          <h2>Seniors</h2>
+          <p>Class of 2027 · Grade 12 · 14 players</p>
+        </header>
+        <ul class="class-names">
+          <li>Bayron Correa</li>
+          <li>Rocco Costello</li>
+          <li>Joaquin Durazo</li>
+          <li>Matix Frithsmith</li>
+          <li>Gavin Lopez</li>
+          <li>Jaxon Marquez</li>
+          <li>Derek Meinecke</li>
+          <li>Nathan Molina</li>
+          <li>Mathew Perez</li>
+          <li>Josh Rogozik</li>
+          <li>Tommy Sweeney</li>
+          <li>JZ Torrez</li>
+          <li>Brady Walker</li>
+          <li>Chris Yap</li>
+        </ul>
+      </section>
+      <section class="class-group">
+        <header class="class-head">
+          <h2>Juniors</h2>
+          <p>Class of 2028 · Grade 11 · 11 players</p>
+        </header>
+        <ul class="class-names">
+          <li>Blake Butler</li>
+          <li>Christian Cespedes</li>
+          <li>Christian Chathle</li>
+          <li>Breckin de Wit</li>
+          <li>Liam Garvin</li>
+          <li>Chris Grunbok</li>
+          <li>Camren Ketner</li>
+          <li>Cayden (CJ) Milne</li>
+          <li>Jamo Pazak</li>
+          <li>Josiah Ramirez</li>
+          <li>Zane Schranz</li>
+        </ul>
+      </section>
+      <section class="class-group">
+        <header class="class-head">
+          <h2>Sophomores</h2>
+          <p>Class of 2029 · Grade 10 · 22 players</p>
+        </header>
+        <ul class="class-names">
+          <li>Elijah Amaya</li>
+          <li>Bennett Anaya</li>
+          <li>Jeremy Bench</li>
+          <li>Connor Buff</li>
+          <li>Cash Carlson</li>
+          <li>Vincent Cortez</li>
+          <li>Parker England</li>
+          <li>Beau Evans</li>
+          <li>Luke Fischer</li>
+          <li>Hunter Hydar</li>
+          <li>Soren Illum</li>
+          <li>Anthony Molina</li>
+          <li>Jackson O&#x27;Hara</li>
+          <li>Maddox Omahen</li>
+          <li>Lucas Polanco</li>
+          <li>Josh Purse</li>
+          <li>Dom Scheetz</li>
+          <li>Bryan Sutton</li>
+          <li>Austin Thompson</li>
+          <li>Jeremiah Torres</li>
+          <li>Hayden Walsh</li>
+          <li>Russell Webert</li>
+        </ul>
+      </section>
+      <section class="class-group">
+        <header class="class-head">
+          <h2>Freshmen</h2>
+          <p>Class of 2030 · Grade 9 · 16 players</p>
+        </header>
+        <ul class="class-names">
+          <li>Jacob Diaz</li>
+          <li>Grayson Donkin</li>
+          <li>Hudson Edwards</li>
+          <li>Teague Frithsmith</li>
+          <li>William Goodman</li>
+          <li>Joseph Guresky</li>
+          <li>Roman Hall</li>
+          <li>Ethan Harris</li>
+          <li>Mason Helo</li>
+          <li>Joncarlo Hernandez</li>
+          <li>Kenny Kirkness</li>
+          <li>Joseph McNulty</li>
+          <li>Carson Mekhdjian</li>
+          <li>Donovan Mendoza</li>
+          <li>Cameron Pratt</li>
+          <li>Owen Sharp</li>
+        </ul>
+      </section>
     </div>
-
-    <table class="roster">
-      <thead>
-        <tr><th>#</th><th>Name</th><th>Position</th><th>Grade</th></tr>
-      </thead>
-      <tbody id="rosterBody"></tbody>
-    </table>
-
+    <p class="roster-note">Full Varsity, JV, and Freshman rosters with numbers and positions coming soon.</p>
   </div>
 </div>
 
@@ -78,6 +183,5 @@
 
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
-<script src="js/team.js"></script>
 </body>
 </html>
