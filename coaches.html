@@ -350,8 +350,40 @@
     setupModal();
   });
 
+  // The moving gallery draws photos with the graphics card, which only works
+  // when the photo's website allows it. Our own photos always work (they're
+  // turned into short paths below); photos hosted elsewhere are tested first
+  // and, if blocked, loaded through a free image relay that allows it.
+  function sitePhotoPath(url) {
+    const u = String(url || '').trim();
+    const m = u.match(/^https?:\/\/(?:www\.)?(?:popcalendar\.github\.io\/HartHawks|harthighbaseball\.com)\/(.+)$/i);
+    return m ? m[1] : u;
+  }
+
+  function canDrawImage(src, timeoutMs) {
+    return new Promise(resolve => {
+      const img = new Image();
+      const timer = setTimeout(() => { img.src = ''; resolve(false); }, timeoutMs || 6000);
+      img.crossOrigin = 'anonymous';
+      img.onload = () => { clearTimeout(timer); resolve(true); };
+      img.onerror = () => { clearTimeout(timer); resolve(false); };
+      img.src = src;
+    });
+  }
+
+  async function galleryPhoto(url) {
+    const src = sitePhotoPath(url);
+    if (!src) return '';
+    if (!/^https?:\/\//i.test(src)) return src; // our own site's photo
+    if (await canDrawImage(src)) return src;
+    const relay = 'https://images.weserv.nl/?url=' + encodeURIComponent(src);
+    if (await canDrawImage(relay)) return relay;
+    return ''; // shows the Hart H instead of a blank card
+  }
+
   async function startCoachGallery(coaches) {
     if (!window.CircularGallery) return false;
+    const photos = await Promise.all(coaches.map(c => galleryPhoto(c.Photo)));
     // Make sure the site font is ready before names are drawn
     try {
       await Promise.all([
@@ -362,8 +394,8 @@
     const section = document.getElementById('coachGallerySection');
     section.classList.add('active');
     const gallery = CircularGallery.init(document.getElementById('coachGallery'), {
-      items: coaches.map(c => ({
-        image: c.Photo,
+      items: coaches.map((c, i) => ({
+        image: photos[i],
         text: c.Name || '',
         subtext: [c.Team, c.Role].filter(Boolean).join(' · '),
         data: c
