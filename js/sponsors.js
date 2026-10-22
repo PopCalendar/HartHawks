@@ -17,15 +17,26 @@
     return String(v == null ? '' : v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   }
 
+  // Read a column no matter how its header is capitalized or spaced.
+  function col(row, ...names) {
+    const keys = Object.keys(row);
+    for (const name of names) {
+      const want = name.toLowerCase();
+      const key = keys.find(k => k.trim().toLowerCase() === want);
+      if (key && String(row[key]).trim()) return String(row[key]).trim();
+    }
+    return '';
+  }
+
   function loadSponsors() {
     if (!sponsorsPromise) {
-      const url = (window.SITE_CONFIG && SITE_CONFIG.sheets && SITE_CONFIG.sheets.sponsors) || '';
+      const url = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.sheets && SITE_CONFIG.sheets.sponsors) || '';
       sponsorsPromise = fetchSheet(url, 'data/sponsors.csv')
         .then(rows => rows
           .map(r => ({
-            name: (r.Name || '').trim(),
-            logo: (r.Logo || r.Image || '').trim(),
-            url: (r.URL || r.Website || r.Link || '').trim()
+            name: col(r, 'Name', 'Sponsor', 'Business'),
+            logo: col(r, 'Logo', 'Image', 'Photo'),
+            url: col(r, 'URL', 'Website', 'Link')
           }))
           .filter(s => s.logo))
         .catch(() => []);
